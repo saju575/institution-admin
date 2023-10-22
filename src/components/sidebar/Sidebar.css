@@ -1,0 +1,42 @@
+#adminSidebar {
+  min-height: 96vh;
+  max-width: 350px;
+  background: #ffffff;
+}
+
+.adminNavbar-link a.active {
+  background: #000;
+}
+
+.adminNavbar-link {
+  background-color: #f5f5f5e7;
+}
+
+.adminNavbar-link.active {
+  color: #ffffff !important;
+  background: #244c63ad;
+}
+
+.dropdown-menu {
+  background: #f3f7f8ad;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dropdown-menu ul li {
+  width: 260px;
+}
+.dropdown-menu ul li a {
+  background: aliceblue;
+  border: thin solid #c5dfe77a;
+  padding: 5px 20px;
+  height: 50px;
+  line-height: 40px;
+}
+
+.adminSidebar-links:hover .dropdown-menu {
+  display: block;
+}
