@@ -1,7 +1,8 @@
 #adminSidebar {
-  min-height: 96vh;
+  min-height: 86vh;
   max-width: 350px;
   background: #ffffff;
+  float: left;
 }
 
 .adminNavbar-link a.active {
@@ -40,3 +41,36 @@
 .adminSidebar-links:hover .dropdown-menu {
   display: block;
 }
+
+
+
+
+
+
+
+/* Admin Responsive Sidebar  */
+
+#adminResponsiveSidebar {
+  background: #ffffff;
+  float: left;
+  position: absolute;
+  top: 123px;
+  /* left: -350px; */
+  height: 100vh;
+  width: 350px;
+}
+
+
+/* Modal Content */
+
+.modal {
+  position: fixed;
+  height: 70vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+} 
