@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Sidebar.css'
+
 import { Link } from 'react-router-dom';
 import { TbBuildingBank, TbLogout2 } from 'react-icons/tb';
 import { BsCaretDownFill } from 'react-icons/bs';
@@ -63,7 +64,10 @@ const Sidebar = () => {
             <div className="dropdown-menu border p-2">
               <ul>
                 <li className=' mb-1 ml-4'><Link to='/management-committee'>পরিচালনা কমিটি</Link></li>
+                <li className=' mb-1 ml-4'><Link to='/president-message'>প্রতিষ্ঠান সভাপতির বাণী</Link></li>
+                <li className=' mb-1 ml-4'><Link to='/principal-message'>অধ্যক্ষের বাণী</Link></li>
                 <li className=' mb-1 ml-4'><Link to='/teachers'>শিক্ষকবৃন্দ</Link></li>
+                <li className=' mb-1 ml-4'><Link to='/workers'>কর্মকর্তা</Link></li>
               </ul>
             </div>
           )}

@@ -6,9 +6,6 @@ import { AiFillEye, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 const Calendar = () => {
 
   const [data, setData] = useState([
-    { id: 1, date: '10 - 1 - 2023', content: 'প্রাথমিক শিক্ষা ক্লাস ক্যালেন্ডার' },
-    { id: 2, date: '10 - 9 - 2015', content: 'মাধ্যমিক শিক্ষা ক্লাস ক্যালেন্ডার' },
-    { id: 3, date: '11 - 10 - 2013', content: 'উচ্চশিক্ষা ক্লাস ক্যালেন্ডার' },
     { id: 4, date: '11 - 10 - 2013', content: 'শিক্ষা প্রতিষ্ঠান ক্লাস ক্যালেন্ডার' },
   ]);
 
@@ -85,6 +82,8 @@ const Calendar = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Add More Content Button */}
       <div className=' cursor-pointer text-end mt-4 text-white'>
         <a href="##" className='bg-[#244c63ad] px-4 my-2 w-44 py-2 border'>নতুন সংযোগ </a>
       </div>
