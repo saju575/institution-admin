@@ -10,7 +10,6 @@ import ClassRoutine from '../pages/classRoutine/ClassRoutine';
 import ExamRoutine from '../pages/examRoutine/ExamRoutine';
 import Notice from '../pages/notice/Notice';
 import Syllabus from '../pages/syllabus/Syllabus';
-import Calendar from '../pages/calendar/Calendar';
 import AdmissionNotice from '../pages/admissionNotice/AdmissionNotice';
 import AdmissionExamSyllabus from '../pages/admissionExamSyllabus/AdmissionExamSyllabus';
 import SeekingAdmission from '../pages/seekingAdmission/SeekingAdmission';
@@ -25,6 +24,10 @@ import Workers from '../pages/workers/Workers';
 import News from '../pages/news/News';
 import AboutUs from '../pages/aboutUs/AboutUs';
 import AimAndObjective from '../pages/aimAndObjective/AimAndObjective';
+import Contact from '../pages/contact/Contact';
+import ScoutGuide from '../pages/scoutGuide/ScoutGuide';
+import DebateCompetition from '../pages/debateCompetition/DebateCompetition';
+import Play from '../pages/play/Play';
 
 export const reactRouter = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<RootLayout />}>
@@ -33,6 +36,10 @@ export const reactRouter = createBrowserRouter(createRoutesFromElements(
     <Route path='/news' element={<News />} />
     <Route path='/about-us' element={<AboutUs />} />
     <Route path='/aim-objective' element={<AimAndObjective />} />
+    <Route path='/contact' element={<Contact />} />
+    <Route path='/scout-guide' element={<ScoutGuide />} />
+    <Route path='/debate-competition' element={<DebateCompetition />} />
+    <Route path='/play' element={<Play />} />
     <Route path='/management-committee' element={<ManagementCommittee />} />
     <Route path='/president-message' element={<PresidentMessage />} />
     <Route path='/principal-message' element={<PrincipalMessage />} />
@@ -42,7 +49,6 @@ export const reactRouter = createBrowserRouter(createRoutesFromElements(
     <Route path='/exam-routine' element={<ExamRoutine />} />
     <Route path='/notice' element={<Notice />} />
     <Route path='/syllabus' element={<Syllabus />} />
-    <Route path='/calendar' element={<Calendar />} />
     <Route path='/admission-notice' element={<AdmissionNotice />} />
     <Route path='/admission-exam-syllabus' element={<AdmissionExamSyllabus />} />
     <Route path='/list-of-selected-students-seeking-admission' element={<SeekingAdmission />} />

@@ -1,0 +1,15 @@
+#contactAdminPanel .contact-inner img {
+  height: 125px;
+  width: 125px;
+}
+
+.contact-map {
+  height: 384px !important;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) { 
+  #contactAdminPanel .form-group input {
+    max-width: 600px !important;
+  }
+}

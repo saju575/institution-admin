@@ -14,6 +14,7 @@ const Sidebar = () => {
   const [isAdminDropdownOpen4, setAdminDropdownOpen4] = useState(false);
   const [isAdminDropdownOpen5, setAdminDropdownOpen5] = useState(false);
   const [isAdminDropdownOpen6, setAdminDropdownOpen6] = useState(false);
+  const [isAdminDropdownOpen7, setAdminDropdownOpen7] = useState(false);
 
   const toggleAdminDropdown = () => {
     setIsAdminDropdownOpen(!isAdminDropdownOpen);
@@ -41,6 +42,10 @@ const Sidebar = () => {
 
   const toggleAdminDropdown6 = () => {
     setAdminDropdownOpen6(!isAdminDropdownOpen6);
+  };
+
+  const toggleAdminDropdown7 = () => {
+    setAdminDropdownOpen7(!isAdminDropdownOpen7);
   };
 
 
@@ -87,7 +92,7 @@ const Sidebar = () => {
             </div>
           )}
 
-          {/* 1st Sidebar Nav Item */}
+          {/* 2nd Sidebar Nav Item */}
           <div onClick={toggleAdminDropdown1} className={`adminNavbar-link ${isAdminDropdownOpen1 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> প্রশাসনিক
@@ -106,7 +111,7 @@ const Sidebar = () => {
             </div>
           )}
 
-          {/* 2nd Sidebar Nav Item */}
+          {/* 3rd Sidebar Nav Item */}
           <div onClick={toggleAdminDropdown2} className={`adminNavbar-link ${isAdminDropdownOpen2 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> একাডেমিক
@@ -120,12 +125,28 @@ const Sidebar = () => {
                 <li className=' mb-1 ml-4'><Link to='/exam-routine'>পরীক্ষার রুটিন</Link></li>
                 <li className=' mb-1 ml-4'><Link to='/notice'>নোটিশ</Link></li>
                 <li className=' mb-1 ml-4'><Link to='/syllabus'>সিলেবাস</Link></li>
-                <li className=' mb-1 ml-4'><Link to='/calendar'>একাডেমিক ক্যালেন্ডার</Link></li>
               </ul>
             </div>
           )}
 
-          {/* 3rd Sidebar Nav Item */}
+          {/* 4rd Sidebar Nav Item */}
+          <div onClick={toggleAdminDropdown7} className={`adminNavbar-link ${isAdminDropdownOpen7 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
+            <div className='flex items-center'>
+              <i className='pr-2'><TbBuildingBank /></i> সহপাঠ
+            </div>
+            <i className='pl-12' ><BsCaretDownFill /></i>
+          </div>
+          {isAdminDropdownOpen7 && (
+            <div className="dropdown-menu border p-2">
+              <ul>
+                <li className=' mb-1 ml-4'><Link to='/scout-guide'>বয় ও গার্লস স্কাউট গাইড</Link></li>
+                <li className=' mb-1 ml-4'><Link to='/debate-competition'>বিতর্ক প্রতিযোগিতা</Link></li>
+                <li className=' mb-1 ml-4'><Link to='/play'>ক্রিয়া</Link></li>
+              </ul>
+            </div>
+          )}
+
+          {/* 5th Sidebar Nav Item */}
           <div onClick={toggleAdminDropdown3} className={`adminNavbar-link ${isAdminDropdownOpen3 ? 'active' : ''} mt-1  px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> ভর্তি
@@ -143,7 +164,7 @@ const Sidebar = () => {
             </div>
           )}
 
-          {/* 4rd Sidebar Nav Item */}
+          {/* 6th Sidebar Nav Item */}
           <div onClick={toggleAdminDropdown4} className={`adminNavbar-link ${isAdminDropdownOpen4 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> রেজাল্ট
@@ -158,7 +179,7 @@ const Sidebar = () => {
             </div>
           )}
 
-          {/* 5th Sidebar Nav Item */}
+          {/* 7th Sidebar Nav Item */}
           <div onClick={toggleAdminDropdown5} className={`adminNavbar-link ${isAdminDropdownOpen5 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> গ্যালারি
@@ -173,22 +194,20 @@ const Sidebar = () => {
             </div>
           )}
 
-          {/* 6th Sidebar Nav Item */}
+          {/* 8th Sidebar Nav Item */}
           <div onClick={toggleAdminDropdown6} className={`adminNavbar-link ${isAdminDropdownOpen6 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
-              <i className='pr-2'><TbBuildingBank /></i> 
-                <li className='list-none mb-1 ml-4'><Link to='/events'>যোগাযোগ</Link></li>
+              <i className='pr-2'><TbBuildingBank /></i> যোগাযোগ
             </div>
-            {/* <i className='pl-12' ><BsCaretDownFill /></i> */}
+            <i className='pl-12' ><BsCaretDownFill /></i>
           </div>
           {isAdminDropdownOpen6 && (
             <div className="dropdown-menu border p-2">
               <ul>
+                <li className=' mb-1 ml-4'><Link to='/contact'>যোগাযোগ</Link></li>
               </ul>
             </div>
           )}
-
-
 
           {/* Logout Icon */}
           <div className='absolute bottom-4 left-4 mt-4 text-center'>
@@ -198,118 +217,12 @@ const Sidebar = () => {
                 Log Out</a></li>
             </ul>
           </div>
+
         </div>
 
       </div>
 
-      {/* Responsive Sidebar */}
-      {/* <div id='adminResponsiveSidebar' className={`adminResponsiveSidebar ${menuVisible ? 'visible' : ''} bg-black block lg:hidden p-8`} >
-
-        <div className={`menu-icon ${menuVisible ? 'cross' : ''}`} onClick={toggleMenu}>
-          {menuVisible ? <FiX /> : <FiMenu />}  
-        </div>
-
-        <div onClick={toggleAdminDropdown} className={`adminNavbar-link ${isAdminDropdownOpen ? 'active' : ''} px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
-          <div className='flex items-center'>
-            <i className='pr-2'><TbBuildingBank /></i> প্রথম পাতা
-          </div>
-          <i className='pl-12' ><BsCaretDownFill /></i>
-        </div>
-        {isAdminDropdownOpen && (
-          <div className="dropdown-menu border p-2">
-            <ul>
-              <li className='mb-1 ml-4'><Link to='/news'>জরুরী নিউজ</Link></li>
-            </ul>
-          </div>
-        )}
-
-        <div onClick={toggleAdminDropdown1} className={`adminNavbar-link ${isAdminDropdownOpen1 ? 'active' : ''} px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
-          <div className='flex items-center'>
-            <i className='pr-2'><TbBuildingBank /></i> প্রশাসনিক
-          </div>
-          <i className='pl-12' ><BsCaretDownFill /></i>
-        </div>
-        {isAdminDropdownOpen1 && (
-          <div className="dropdown-menu border p-2">
-            <ul>
-              <li onClick={closeSidebar} className=' mb-1 ml-4'><Link to='/management-committee'>পরিচালনা কমিটি</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/teachers'>শিক্ষকবৃন্দ</Link></li>
-            </ul>
-          </div>
-        )}
-
-        <div onClick={toggleAdminDropdown2} className={`adminNavbar-link ${isAdminDropdownOpen2 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
-          <div className='flex items-center'>
-            <i className='pr-2'><TbBuildingBank /></i> একাডেমিক
-          </div>
-          <i className='pl-12' ><BsCaretDownFill /></i>
-        </div>
-        {isAdminDropdownOpen2 && (
-          <div className="dropdown-menu border p-2">
-            <ul>
-              <li className=' mb-1 ml-4'><Link to='/class-routine'>ক্লাস রুটিন</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/exam-routine'>পরীক্ষার রুটিন</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/notice'>নোটিশ</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/syllabus'>সিলেবাস</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/calendar'>একাডেমিক ক্যালেন্ডার</Link></li>
-            </ul>
-          </div>
-        )}
-
-        <div onClick={toggleAdminDropdown3} className={`adminNavbar-link ${isAdminDropdownOpen3 ? 'active' : ''} mt-1  px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
-          <div className='flex items-center'>
-            <i className='pr-2'><TbBuildingBank /></i> ভর্তি
-          </div>
-          <i className='pl-12' ><BsCaretDownFill /></i>
-        </div>
-        {isAdminDropdownOpen3 && (
-          <div className="dropdown-menu border p-2">
-            <ul>
-              <li className=' mb-1 ml-4'><Link to='/admission-notice'>ভর্তি বিজ্ঞপ্তি</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/admission-exam-syllabus'>ভর্তি পরিক্ষার সিলেবাস</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/list-of-selected-students-seeking-admission'>ভর্তি নির্বাচিত শিক্ষার্থীর তালিকা</Link></li>
-              <li className=' mb-1 ml-4'><Link to='/list-of-selected-students-waiting-admission'>ভর্তি অপেক্ষমান শিক্ষার্থীর তালিকা</Link></li>
-            </ul>
-          </div>
-        )}
-
-        <div onClick={toggleAdminDropdown4} className={`adminNavbar-link ${isAdminDropdownOpen4 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
-          <div className='flex items-center'>
-            <i className='pr-2'><TbBuildingBank /></i> রেজাল্ট
-          </div>
-          <i className='pl-12' ><BsCaretDownFill /></i>
-        </div>
-        {isAdminDropdownOpen4 && (
-          <div className="dropdown-menu border p-2">
-            <ul>
-              <li className=' mb-1 ml-4'><Link to='/school-result'>স্কুল রেজাল্ট</Link></li>
-            </ul>
-          </div>
-        )}
-
-        <div onClick={toggleAdminDropdown5} className={`adminNavbar-link ${isAdminDropdownOpen5 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
-          <div className='flex items-center'>
-            <i className='pr-2'><TbBuildingBank /></i> গ্যালারি
-          </div>
-          <i className='pl-12' ><BsCaretDownFill /></i>
-        </div>
-        {isAdminDropdownOpen5 && (
-          <div className="dropdown-menu border p-2">
-            <ul>
-              <li className=' mb-1 ml-4'><Link to='/events'>ইভেন্টস</Link></li>
-            </ul>
-          </div>
-        )}
-
-        <div className='absolute bottom-4 left-4 mt-4 text-center'>
-          <ul>
-            <li className='flex'><a href="##" className='flex items-center'>
-              <i className='pr-2 text-2xl'><TbLogout2 /></i>
-              Log Out</a></li>
-          </ul>
-        </div>
-
-      </div> */}
+    
 
 
       {/* Responsive Sidebar */}
@@ -375,12 +288,28 @@ const Sidebar = () => {
                 <li onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/exam-routine'>পরীক্ষার রুটিন</Link></li>
                 <li onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/notice'>নোটিশ</Link></li>
                 <li onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/syllabus'>সিলেবাস</Link></li>
-                <li onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/calendar'>একাডেমিক ক্যালেন্ডার</Link></li>
               </ul>
             </div>
           )}
 
           {/* Dropdown Sidebar Menu 4 */}
+          <div onClick={toggleAdminDropdown7} className={`adminNavbar-link ${isAdminDropdownOpen7 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
+            <div className='flex items-center'>
+              <i className='pr-2'><TbBuildingBank /></i> সহপাঠ
+            </div>
+            <i className='pl-12' ><BsCaretDownFill /></i>
+          </div>
+          {isAdminDropdownOpen7 && (
+            <div className="dropdown-menu border p-2">
+              <ul>
+                <li  onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/scout-guide'>বয় ও গার্লস স্কাউট গাইড</Link></li>
+                <li  onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/debate-competition'>বিতর্ক প্রতিযোগিতা</Link></li>
+                <li  onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/play'>ক্রিয়া</Link></li>
+              </ul>
+            </div>
+          )}
+
+          {/* Dropdown Sidebar Menu 5 */}
           <div onClick={toggleAdminDropdown3} className={`adminNavbar-link ${isAdminDropdownOpen3 ? 'active' : ''} mt-1  px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> ভর্তি
@@ -398,7 +327,7 @@ const Sidebar = () => {
             </div>
           )}
 
-          {/* Dropdown Sidebar Menu 5 */}
+          {/* Dropdown Sidebar Menu 6 */}
           <div onClick={toggleAdminDropdown4} className={`adminNavbar-link ${isAdminDropdownOpen4 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> রেজাল্ট
@@ -413,7 +342,7 @@ const Sidebar = () => {
             </div>
           )}
 
-          {/* Dropdown Sidebar Menu 6 */}
+          {/* Dropdown Sidebar Menu 7 */}
           <div onClick={toggleAdminDropdown5} className={`adminNavbar-link ${isAdminDropdownOpen5 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
             <div className='flex items-center'>
               <i className='pr-2'><TbBuildingBank /></i> গ্যালারি
@@ -424,6 +353,21 @@ const Sidebar = () => {
             <div className="dropdown-menu border p-2">
               <ul>
                 <li onClick={removeSidebar} className=' mb-1 ml-4'><Link to='/events'>ইভেন্টস</Link></li>
+              </ul>
+            </div>
+          )}
+
+          {/* Dropdown Sidebar Menu 8 */}
+          <div onClick={toggleAdminDropdown6} className={`adminNavbar-link ${isAdminDropdownOpen6 ? 'active' : ''} mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}>
+            <div className='flex items-center'>
+              <i className='pr-2'><TbBuildingBank /></i> যোগাযোগ
+            </div>
+            <i className='pl-12' ><BsCaretDownFill /></i>
+          </div>
+          {isAdminDropdownOpen6 && (
+            <div className="dropdown-menu border p-2">
+              <ul>
+                <li onClick={removeSidebar} className='mb-1 ml-4'><Link to='/contact'>যোগাযোগ</Link></li>
               </ul>
             </div>
           )}
