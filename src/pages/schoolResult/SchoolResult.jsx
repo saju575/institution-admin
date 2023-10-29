@@ -15,6 +15,22 @@ const SchoolResult = () => {
       class: 'দশম',
       content: 'দশম শ্রেণির রেজাল্ট ২০২৩'
     },
+    
+    {
+      id: 2,
+      date: '10 - 1 - 2023',
+      term: 'Half Yearly Examination',
+      class: 'নবম',
+      content: 'নবম শ্রেণির রেজাল্ট ২০২৩'
+    },
+
+    {
+      id: 3,
+      date: '10 - 1 - 2023',
+      term: 'Half Yearly Examination',
+      class: 'অস্টম',
+      content: 'অস্টম শ্রেণির রেজাল্ট ২০২৩'
+    },
   ]);
 
   const handleDelete = (id) => {
@@ -60,9 +76,9 @@ const SchoolResult = () => {
 
   return (
     <>
-      <div className='bg-white px-4 mt-4'>
+      <div className='bg-white mt-4'>
 
-        <h2 className='text-xl text-white bg-[#244c63ad] py-4 text-center'>সিএসভি ফাইল আপলোড করুন</h2>
+        <h2 className='text-lg sm:text-xl text-white bg-[#244c63ad] py-4 pl-4'>সিএসভি ফাইল আপলোড করুন</h2>
         
         {/* CSV File Area */}
         <div id="classRoutine" className="my-4">

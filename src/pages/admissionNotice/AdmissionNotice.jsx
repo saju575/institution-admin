@@ -61,6 +61,12 @@ const AdmissionNotice = () => {
   return (
     <>
       <div id="classRoutine" className="my-4">
+      
+        {/* Section Title */}
+        <div className="teachers-title mt-4">
+          <h3 className='bg-[#79929C] text-white font-medium text-md p-4 mb-3'>ভর্তি বিজ্ঞপ্তি</h3>
+        </div>
+
         <div className="border vertical-scrollMain bg-[#DBE8E960]">
           <table className="border-collapse w-full vertical-scroll">
 

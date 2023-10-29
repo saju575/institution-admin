@@ -62,6 +62,12 @@ const SeekingAdmission = () => {
 
   return (
     <>
+
+      {/* Section Title */}
+      <div className="teachers-title mt-4">
+        <h3 className='bg-[#79929C] text-white font-medium text-md p-4 mb-3'>ভর্তি নির্বাচিত শিক্ষার্থীর তালিকা</h3>
+      </div>
+
       <div id="classRoutine" className="my-4">
         <div className="border vertical-scrollMain bg-[#DBE8E960]">
           <table className="border-collapse w-full vertical-scroll">
@@ -173,7 +179,7 @@ const SeekingAdmission = () => {
                   <div className="text-center mt-14 text-black">
                     <button type="submit" className='bg-[#c5dfe77a] px-12 py-4'>সংযোগ করুন</button>
                   </div>
-                  
+
                 </form>
               </div>
             </div>

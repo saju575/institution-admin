@@ -77,8 +77,12 @@ const Notice = () => {
 
   return (
     <React.Fragment>
-      <div className='py-5 pl-10 bg-[#FFFFFF] mt-4 shadow-lg'>
+      {/* Section Title */}
+      <div className="teachers-title mt-4">
+        <h3 className='bg-[#79929C] text-white font-medium text-md p-4 mb-3'>নোটিশ</h3>
+      </div>
 
+      <div className='py-5 pl-0 lg:pl-10 bg-[#FFFFFF] mt-4 shadow-lg'>
         {notices.map((notice, index) => (
           <>
             <div className='bg-[#F1EFEF] flex flex-wrap justify-between m-2 cursor-pointer items-center' key={index}>
@@ -153,7 +157,7 @@ const Notice = () => {
       {isModalOpen && (
         <div className="overlay"></div>
       )}
-      
+
     </React.Fragment>
   )
 }

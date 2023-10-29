@@ -65,6 +65,12 @@ const WaitingAdmission = () => {
 
   return (
     <>
+
+      {/* Section Title */}
+      <div className="teachers-title mt-4">
+        <h3 className='bg-[#79929C] text-white font-medium text-md p-4 mb-3'>ভর্তি অপেক্ষমান শিক্ষার্থীর তালিকা</h3>
+      </div>
+      
       <div id="classRoutine" className="my-4">
         <div className="border vertical-scrollMain bg-[#DBE8E960]">
           <table className="border-collapse w-full vertical-scroll">
@@ -105,7 +111,7 @@ const WaitingAdmission = () => {
                       View
                     </a>
                   </td>
-                  
+
                   <td className="p-2">
                     <a href={`#download-link-${row.id}`} className="py-2 flex items-center">
                       <i className="pr-1">
@@ -157,7 +163,7 @@ const WaitingAdmission = () => {
               <div className='mt-10'>
 
                 <form>
-                  
+
                   <div className="form-group flex flex-wrap my-2 items-center ">
                     <label htmlFor="title" className='pr-4 w-44'>অপেক্ষমান শিক্ষার্থীর  টাইটেলঃ</label>
                     <input className='outline-none px-4 py-2 bg-[#F3F3F3]' type="text" id="title" name="title" placeholder="অপেক্ষমান শিক্ষার্থীর টাইটেল" />

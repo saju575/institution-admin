@@ -80,7 +80,7 @@ const Events = () => {
       <div className="detailEvents-title mt-4">
         <h3 className='bg-[#79929C] text-white font-medium text-md p-4 mb-2'>ইভেন্টস</h3>
       </div>
-      <div className="mb-4 relative ml-4 grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="mb-4 relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
         {eventsData.map(event => (
           <div key={event.id} className='events-inner mt-2 shadow bg-[#FAFAFA]'>
             <picture>

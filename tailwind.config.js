@@ -6,10 +6,10 @@ module.exports = {
       container: {
         padding: {
           DEFAULT: '1rem',
-          sm: '2rem',
-          lg: '4rem',
-          xl: '5rem',
-          '2xl': '10rem',
+          sm: '1rem',
+          lg: '1rem',
+          xl: '3rem',
+          '2xl': '8rem',
           center: true
         }
       }

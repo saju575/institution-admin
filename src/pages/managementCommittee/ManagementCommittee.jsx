@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import './ManagementCommittee.css'
 import { RxCross2 } from 'react-icons/rx';
+
 const ManagementCommittee = () => {
 
   const managerData = [
-
     {
       name: 'মোঃ খলিলুর রহমান',
       designation: 'সাধারণ শিক্ষক',
       image: '/assets/profile.jpg',
       phone: '04161-354156',
     },
-
   ]
 
   const handleUpdate = (index) => {
@@ -95,15 +94,17 @@ const ManagementCommittee = () => {
           <div className="modal shadow absolute top-10  bg-[#FFFFFF]  border p-14 max-w-96 ">
             <div className="modal-content">
               <span className="close cursor-pointer border bg-[#111] px-4 text-end py-1 text-white absolute right-2 top-2" onClick={handleModalClose}><a href="##"><i className=' py-8 text-2xl '><RxCross2 /></i></a></span>
+
               {/* form content goes here */}
               <div className='mt-10'>
                 <form>
+              
                   <div className="form-group flex flex-wrap my-2 items-center ">
                     <label htmlFor="title" className='pr-4 w-32'>কমিটির নামঃ</label>
                     <input className='outline-none px-4 py-2 bg-[#F3F3F3]' type="text" id="title" name="title" placeholder="কমিটির নাম" />
                   </div>
-                  <div className="form-group flex flex-wrap my-2 items-center ">
 
+                  <div className="form-group flex flex-wrap my-2 items-center ">
                     <label htmlFor="title" className='pr-4 w-32'>পদঃ</label>
                     <input className='outline-none  px-4 py-2 bg-[#F3F3F3]' type="text" id="title" name="title" placeholder="পদ" />
                   </div>
@@ -112,20 +113,23 @@ const ManagementCommittee = () => {
                     <label htmlFor="date" className='pr-4 w-32'>মোবাইল নম্বরঃ</label>
                     <input className='outline-none  px-4 py-2 bg-[#F3F3F3]' type="text" id="title" name="title" placeholder="মোবাইল নম্বর" />
                   </div>
+
                   <div className="form-group my-4">
                     <label htmlFor="image" className='pr-4 w-32'>কমিটির ছবিঃ</label>
                     <input src={selectedImage} type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} />
-
                   </div>
+
                   <div className="text-center mt-14 text-black">
                     <button type="submit" className='bg-[#c5dfe77a] px-12 py-4'>সংযোগ করুন</button>
                   </div>
+
                 </form>
               </div>
             </div>
           </div>
         </div>
       )}
+
     </div>
   )
 }

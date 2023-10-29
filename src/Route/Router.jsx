@@ -22,11 +22,17 @@ import DetailEvents from '../pages/detailEvents/DetailEvents';
 import PresidentMessage from '../pages/presidentMessage/PresidentMessage';
 import PrincipalMessage from '../pages/principalMessage/PrincipalMessage';
 import Workers from '../pages/workers/Workers';
+import News from '../pages/news/News';
+import AboutUs from '../pages/aboutUs/AboutUs';
+import AimAndObjective from '../pages/aimAndObjective/AimAndObjective';
 
 export const reactRouter = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<RootLayout />}>
     <Route path='/' element={<Login />} />
     <Route path='/admin' element={<Home />} />
+    <Route path='/news' element={<News />} />
+    <Route path='/about-us' element={<AboutUs />} />
+    <Route path='/aim-objective' element={<AimAndObjective />} />
     <Route path='/management-committee' element={<ManagementCommittee />} />
     <Route path='/president-message' element={<PresidentMessage />} />
     <Route path='/principal-message' element={<PrincipalMessage />} />

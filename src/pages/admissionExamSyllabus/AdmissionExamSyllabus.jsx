@@ -60,6 +60,11 @@ const AdmissionExamSyllabus = () => {
 
   return (
     <>
+      {/* Section Title */}
+      <div className="teachers-title mt-4">
+        <h3 className='bg-[#79929C] text-white font-medium text-md p-4 mb-3'>ভর্তি পরিক্ষার সিলেবাস</h3>
+      </div>
+
       <div className="my-4">
         <div className="border vertical-scrollMain bg-[#DBE8E960]">
           <table className="border-collapse w-full vertical-scroll">
