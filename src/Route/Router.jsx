@@ -22,6 +22,7 @@ import Login from "../pages/login/Login";
 import ManagementCommittee from "../pages/managementCommittee/ManagementCommittee";
 import News from "../pages/news/News";
 import Notice from "../pages/notice/Notice";
+import NoticeDetails from "../pages/noticeDetails/NoticeDetails";
 import Play from "../pages/play/Play";
 import PresidentMessage from "../pages/presidentMessage/PresidentMessage";
 import PrincipalMessage from "../pages/principalMessage/PrincipalMessage";
@@ -71,6 +72,8 @@ export const reactRouter = createBrowserRouter(
       <Route path="/events" element={<Events />} />
       {/* Edit Next line */}
       <Route path="/detail-events" element={<DetailEvents />} />
+
+      <Route path="/notice/:id" element={<NoticeDetails />} />
     </Route>
   )
 );

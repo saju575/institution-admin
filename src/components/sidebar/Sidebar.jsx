@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./Sidebar.css";
 
 import { BsCaretDownFill } from "react-icons/bs";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import { TbBuildingBank, TbLogout2 } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
   const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
   const [isAdminDropdownOpen1, setIsAdminDropdownOpen1] = useState(false);
   const [isAdminDropdownOpen2, setAdminDropdownOpen2] = useState(false);
@@ -48,22 +48,22 @@ const Sidebar = () => {
     setAdminDropdownOpen7(!isAdminDropdownOpen7);
   };
 
-  const [menuVisible, setMenuVisible] = useState(false);
+  // const [menuVisible, setMenuVisible] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
+  // const toggleMenu = () => {
+  //   setMenuVisible(!menuVisible);
+  // };
 
   // New Side bar
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  // };
 
-  const removeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+  // const removeSidebar = () => {
+  //   setIsSidebarOpen(false);
+  // };
 
   return (
     <React.Fragment>
@@ -355,7 +355,7 @@ const Sidebar = () => {
 
       {/* Responsive Sidebar */}
       <div className="adminResponsiveSidebar block lg:hidden">
-        <div className={`menu-bar ${isSidebarOpen ? "open" : ""}`}>
+        {/* <div className={`menu-bar ${isSidebarOpen ? "open" : ""}`}>
           <div className="menu-icon" onClick={toggleSidebar}>
             <div
               className={`menu-icon ${menuVisible ? "cross" : ""}`}
@@ -364,10 +364,10 @@ const Sidebar = () => {
               {menuVisible ? <FiX /> : <FiMenu />}
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div
-          className={`sidebar ${
+          className={`sidebar bg-slate-300  ${
             isSidebarOpen ? "open" : ""
           } ml-2 p-5 pt-14  mt-2`}
         >
@@ -376,9 +376,9 @@ const Sidebar = () => {
             onClick={toggleAdminDropdown}
             className={`adminNavbar-link ${
               isAdminDropdownOpen ? "active" : ""
-            } px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
-            <button className="close-button" onClick={toggleSidebar}>
+            <button className="close-button" onClick={removeSidebar}>
               <span>
                 <FiX />
               </span>
@@ -397,7 +397,7 @@ const Sidebar = () => {
             <div className="dropdown-menu border p-2">
               <ul>
                 <li onClick={removeSidebar} className="mb-1 ml-4">
-                  <Link to="/news">জরুরী নিউজ</Link>
+                  <Link to="/">জরুরী নিউজ</Link>
                 </li>
                 <li onClick={removeSidebar} className="mb-1 ml-4">
                   <Link to="/about-us">আমাদের কথা</Link>
@@ -414,7 +414,7 @@ const Sidebar = () => {
             onClick={toggleAdminDropdown1}
             className={`adminNavbar-link ${
               isAdminDropdownOpen1 ? "active" : ""
-            } px-4 mt-1 py-2 flex justify-between flex cursor-pointer items-center`}
+            } px-4 mt-1 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -432,8 +432,17 @@ const Sidebar = () => {
                 <li onClick={removeSidebar} className=" mb-1 ml-4">
                   <Link to="/management-committee">পরিচালনা কমিটি</Link>
                 </li>
+                <li onClick={removeSidebar} className="mb-1 ml-4">
+                  <Link to="/president-message">প্রতিষ্ঠান সভাপতির বাণী</Link>
+                </li>
+                <li onClick={removeSidebar} className="mb-1 ml-4">
+                  <Link to="/principal-message">অধ্যক্ষের বাণী</Link>
+                </li>
                 <li onClick={removeSidebar} className=" mb-1 ml-4">
                   <Link to="/teachers">শিক্ষকবৃন্দ</Link>
+                </li>
+                <li onClick={removeSidebar} className="mb-1 ml-4">
+                  <Link to="/workers">কর্মকর্তা</Link>
                 </li>
               </ul>
             </div>
@@ -444,7 +453,7 @@ const Sidebar = () => {
             onClick={toggleAdminDropdown2}
             className={`adminNavbar-link ${
               isAdminDropdownOpen2 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -480,7 +489,7 @@ const Sidebar = () => {
             onClick={toggleAdminDropdown7}
             className={`adminNavbar-link ${
               isAdminDropdownOpen7 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -513,7 +522,7 @@ const Sidebar = () => {
             onClick={toggleAdminDropdown3}
             className={`adminNavbar-link ${
               isAdminDropdownOpen3 ? "active" : ""
-            } mt-1  px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1  px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -609,7 +618,7 @@ const Sidebar = () => {
             onClick={toggleAdminDropdown6}
             className={`adminNavbar-link ${
               isAdminDropdownOpen6 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -632,15 +641,15 @@ const Sidebar = () => {
           )}
 
           {/* Logout Button */}
-          <div className="absolute bottom-4 left-4 mt-4 text-center">
+          <div className="mt-4 text-center">
             <ul>
               <li className="flex">
-                <a href="##" className="flex items-center">
+                <span className="cursor-pointer flex items-center">
                   <i className="pr-2 text-2xl">
                     <TbLogout2 />
                   </i>
                   Log Out
-                </a>
+                </span>
               </li>
             </ul>
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Topbar from "../topbar/Topbar";
 import Sidebar from "./Sidebar";
@@ -7,6 +7,13 @@ import { useLocation } from "react-router-dom";
 
 const RootLayout = () => {
   const location = useLocation();
+
+  // New Side bar
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   if (location.pathname === "/login") {
     return (
@@ -17,9 +24,9 @@ const RootLayout = () => {
   }
   return (
     <div>
-      <Topbar />
+      <Topbar menuVisible={isSidebarOpen} toggleMenu={toggleSidebar} />
 
-      <Sidebar />
+      <Sidebar isSidebarOpen={isSidebarOpen} removeSidebar={toggleSidebar} />
       <Outlet />
     </div>
   );

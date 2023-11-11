@@ -1,106 +1,135 @@
-import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-
-import './News.css';
+import React, { useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useInfiniteQuery } from "react-query";
+import CreateModal from "../../components/allNotice/CreateModal";
+import ErrorMsg from "../../components/errorMsg/ErrorMsg";
+import Spinner from "../../components/spinner/Spinner";
+import { getAllNews } from "../../utills/getAllNews";
+import "./News.css";
+import NewsCard from "./NewsCard";
 
 const News = () => {
+  // Modal popup For add routine
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
-  // Selected Image from Desktop
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setSelectedImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleModalOpen = () => {
+    setCreateModalOpen(true);
   };
 
-
-  const [text, setText] = useState('');
-
-  const handleChange = (value) => {
-    setText(value);
+  const handleModalClose = () => {
+    setCreateModalOpen(false);
   };
 
+  /* 
+    get all the data
+  */
+  const {
+    data,
+    refetch,
+    isError,
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["urgent news"],
+    queryFn: ({ pageParam }) =>
+      getAllNews({ page: pageParam, limit: 10, priority: "urgent" }),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
+        return lastPage.payload.currentPage + 1;
+      } else {
+        return false;
+      }
+    },
+  });
 
-  const newsItem = [
-    'পবিত্র ঈদ-মিলাদুন্নবী (সা:) উদযাপন উপলক্ষ্যে কর্মসূচি।',
-    'প্রতিষ্ঠানে সাত জন নতুন শিক্ষক নিয়োগ সম্পর্কে।',
-    'দাখিল পরীক্ষা-২০২৩ এ মেধাবৃত্তি ও সাধারণ।',
-  ]
+  /* 
+        store the all page data in the one array to scroll infinitely
+      */
+  const urgentNews = data?.pages.reduce((acc, page) => {
+    return [...acc, ...page.payload.news];
+  }, []);
 
   return (
     <React.Fragment>
-
-      <div id='NewsAdminPanel' className='bg-[#FFFFFF]'>
+      <div id="NewsAdminPanel" className="bg-[#FFFFFF]">
         <div className="teachers-title">
-          <h3 className='bg-[#79929C] text-white font-medium text-md mt-4 py-4 pl-4'>জরুরী নিউজঃ</h3>
+          <h3 className="bg-[#79929C] text-white font-medium text-md mt-4 py-4 pl-4">
+            জরুরী নিউজঃ
+          </h3>
+        </div>
+
+        {/* add new */}
+        <div className="cursor-pointer text-end my-6 text-white">
+          <span
+            onClick={handleModalOpen}
+            className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
+          >
+            নতুন সংযোগ
+          </span>
         </div>
 
         {/* Current Important News Area */}
-        <h4 className='font-medium text-lg mt-8 underline pl-4'>বর্তমান নিউজঃ</h4>
-
-        <div className='currentNews pl-4'>
-          {newsItem.map((item, index) => (
-            <li className='list-none mx-2' key={index}>
-              <div className='currentNewsList my-2 flex justify-between flex-wrap'>
-                <a href='##'>{item}</a>
-                <button className='bg-[#CE5A67] text-white px-4 py-1'>মুছুন</button>
+        <h4 className="font-medium text-lg mt-8 underline pl-4">
+          বর্তমান নিউজঃ
+        </h4>
+        {urgentNews?.length > 0 && (
+          <InfiniteScroll
+            dataLength={urgentNews?.length > 0 ? urgentNews.length : 0}
+            next={fetchNextPage}
+            hasMore={hasNextPage}
+            loader={
+              <div className="flex justify-center items-center py-4">
+                <Spinner />
               </div>
-            </li>
+            }
+            className="currentNews pl-4"
+          >
+            {urgentNews.map((item, index) => (
+              <NewsCard key={index} item={item} refetch={refetch} />
+            ))}
+          </InfiniteScroll>
+        )}
 
-          ))}
-        </div>
-
-        {/* Add New Important News Area */}
-        <div className="addNewNews flex flex-col pl-4 lg:pl-0">
-          <h4 className='font-medium text-lg mt-8 py-4 underline'>নতুন জরুরী নিউজ সংযোগ করুনঃ</h4>
-
-          {/* Text Area to add news */}
-          <div>
-            <ReactQuill className='h-44' value={text} onChange={handleChange} />
+        {/* 
+          showing error messages and loading
+        */}
+        {isLoading && (
+          <div className="flex justify-center items-center py-4">
+            <Spinner />
           </div>
-
-          <div className="mt-20 text-black">
-            <button type="submit" className='bg-[#c5dfe77a] px-6 py-2 mb-2'>সংযোগ করুন</button>
+        )}
+        {!isLoading && urgentNews?.length === 0 && (
+          <div className="flex justify-center items-center py-4">
+            <ErrorMsg msg="No data found" />
           </div>
-
-        </div>
-
-
-
-        {/* Add PDF Area */}
-        <div className='mt-10 flex flex-col pl-4 lg:pl-0'>
-          <h4 className='font-medium text-lg py-4 underline'>পিডিএফ সংযোগ করুনঃ</h4>
-
-          {/* form content goes here */}
-          <form>
-
-            <div className="form-group flex flex-wrap my-2 items-center ">
-              <label htmlFor="title" className='pr-4 w-32'>নিউজের টাইটেলঃ</label>
-              <input className='outline-none px-4 py-2 bg-[#F3F3F3]' type="text" id="title" name="title" placeholder="নিউজের টাইটেল" />
-            </div>
-
-
-            <div className="form-group my-4">
-              <label htmlFor="image" className='pr-4 w-32'>নিউজের পিডিএফঃ</label>
-              <input src={selectedImage} type="file" id="image" name="image" accept="image/*" onChange={handleImageChange} />
-            </div>
-
-            <div className="mt-8 text-black">
-              <button type="submit" className='bg-[#c5dfe77a] px-6 py-2 mb-2'>সংযোগ করুন</button>
-            </div>
-
-          </form>
-        </div>
-
+        )}
+        {isError && (
+          <div className="flex justify-center items-center py-4">
+            <ErrorMsg msg={error.message} />
+          </div>
+        )}
       </div>
+
+      {/* Modal Popup */}
+
+      {isCreateModalOpen && <div className="overlay"></div>}
+
+      {isCreateModalOpen && (
+        <CreateModal
+          handleModalClose={handleModalClose}
+          keyword={"urgent news"}
+          type={"general notice"}
+          heading={{
+            title: "জরুরী নিউজের শিরোনাম",
+            pdf: "জরুরী নিউজের পিডিএফ",
+            img: "জরুরী নিউজের ছবি",
+            desc: "জরুরী নিউজের বর্ণনা",
+          }}
+          setPriority={"urgent"}
+        />
+      )}
     </React.Fragment>
   );
 };

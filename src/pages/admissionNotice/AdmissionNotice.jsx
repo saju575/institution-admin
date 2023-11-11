@@ -1,190 +1,156 @@
-import React, { useState } from 'react';
-import { BsFillCalendarDateFill } from 'react-icons/bs';
-import { PiDownloadSimpleBold } from 'react-icons/pi';
-import { AiFillEye, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { RxCross2 } from 'react-icons/rx';
-
+import React, { useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useInfiniteQuery } from "react-query";
+import CreateModal from "../../components/allNotice/CreateModal";
+import ErrorMsg from "../../components/errorMsg/ErrorMsg";
+import Spinner from "../../components/spinner/Spinner";
+import { getAllNews } from "../../utills/getAllNews";
+import AdmissionNoticeCard from "./AdmissionNoticeCard";
 
 const AdmissionNotice = () => {
-
-  const [data, setData] = useState([
-    { id: 1, date: '10 - 1 - 2023', content: 'দশম শ্রেনীর ভর্তি বিজ্ঞপ্তি - ২০২৩' },
-    { id: 2, date: '10 - 1 - 2023', content: 'নবম শ্রেনীর ভর্তি বিজ্ঞপ্তি - ২০২৩' },
-    { id: 3, date: '10 - 1 - 2023', content: 'সপ্তম শ্রেনীর ভর্তি বিজ্ঞপ্তি - ২০২৩' },
-  ]);
-
-  const handleUpdate = (id) => {
-
-  };
-
-  const handleDelete = (id) => {
-    const newData = data.filter(item => item.id !== id);
-    setData(newData);
-  };
-
-
-  // Modal popup For add Events
-  const [isModalOpen, setModalOpen] = useState(false);
+  //modal state for selected student admission
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
   const handleModalOpen = () => {
-    setModalOpen(true);
+    setCreateModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setModalOpen(false);
+    setCreateModalOpen(false);
   };
 
-  // Selected Image from Desktop
-  const [selectedImage, setSelectedImage] = useState(null);
+  /* 
+    get  all the  data
+  */
+  const {
+    data,
+    refetch,
+    isError,
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
+    staleTime: Infinity,
+    queryKey: ["admission circular"],
+    queryFn: ({ pageParam }) =>
+      getAllNews({ page: pageParam, limit: 10, type: "admission circular" }),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
+        return lastPage.payload.currentPage + 1;
+      } else {
+        return false;
+      }
+    },
+  });
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setSelectedImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  // Seleceted Date 
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+  /* 
+      store the all page data in the one array to scroll infinitely
+    */
+  const admission_circular_data = data?.pages.reduce((acc, page) => {
+    return [...acc, ...page.payload.news];
+  }, []);
 
   return (
     <>
       <div id="classRoutine" className="my-4">
-      
         {/* Section Title */}
         <div className="teachers-title mt-4">
-          <h3 className='bg-[#79929C] text-white font-medium text-md p-4 mb-3'>ভর্তি বিজ্ঞপ্তি</h3>
+          <h3 className="bg-[#79929C] text-white font-medium text-md p-4 mb-3">
+            ভর্তি বিজ্ঞপ্তি
+          </h3>
         </div>
 
+        {/* add button */}
+        <div className=" cursor-pointer text-end my-6 text-white">
+          <span
+            onClick={handleModalOpen}
+            className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
+          >
+            নতুন সংযোগ{" "}
+          </span>
+        </div>
+
+        {/* render data */}
         <div className="border vertical-scrollMain bg-[#DBE8E960]">
-          <table className="border-collapse w-full vertical-scroll">
+          {admission_circular_data?.length > 0 && (
+            <InfiniteScroll
+              dataLength={
+                admission_circular_data?.length > 0
+                  ? admission_circular_data.length
+                  : 0
+              }
+              next={fetchNextPage}
+              hasMore={hasNextPage}
+              loader={
+                <div className="flex justify-center items-center py-4">
+                  <Spinner />
+                </div>
+              }
+            >
+              <table className="border-collapse w-full vertical-scroll">
+                <thead>
+                  <tr className="bg-[#BBCDCD60]">
+                    <th className="p-2 text-start w-3/12">প্রকাশের তারিখ</th>
+                    <th className="p-2 text-start w-5/12">নোটিশ</th>
+                    <th className="p-2 text-start w-2/12">ভিউ</th>
+                    <th className="p-2 text-start w-2/12">ডাউনলোড[PDF]</th>
+                    <th className="p-2 text-start w-2/12">ডাউনলোড[Img]</th>
+                    <th className="p-2 text-start w-1/12">সম্পাদনা</th>
+                    <th className="p-2 text-start w-1/12">মুছুন</th>
+                  </tr>
+                </thead>
 
-            <thead>
-              <tr className="bg-[#BBCDCD60]">
-                <th className="p-2 text-start w-3/12">প্রকাশের তারিখ</th>
-                <th className="p-2 text-start w-5/12">নোটিশ</th>
-                <th className="p-2 text-start w-2/12">ভিউ [PDF]</th>
-                <th className="p-2 text-start w-2/12">ডাউনলোড [PDF]</th>
-                <th className="p-2 text-start w-1/12">সম্পাদনা</th>
-                <th className="p-2 text-start w-1/12">মুছুন</th>
-              </tr>
-            </thead>
+                <tbody>
+                  {admission_circular_data.map((row) => (
+                    <AdmissionNoticeCard
+                      key={row._id}
+                      notice={row}
+                      refetch={refetch}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </InfiniteScroll>
+          )}
+        </div>
 
-            <tbody>
-              {data.map((row) => (
-                <tr key={row.id} className="border-b">
-                  <div className="flex items-center pt-2">
-                    <td className="p-2">
-                      <i>
-                        <BsFillCalendarDateFill />
-                      </i>
-                    </td>
-                    <td className="py-2">{row.date}</td>
-                  </div>
-                  <td className="p-2">{row.content}</td>
-                  <td className="p-2">
-                    <a href={`#view-link-${row.id}`} className="flex items-center">
-                      <i className="pr-1">
-                        <AiFillEye />
-                      </i>
-                      View
-                    </a>
-                  </td>
-                  <td className="p-2">
-                    <a href={`#download-link-${row.id}`} className="py-2 flex items-center">
-                      <i className="pr-1">
-                        <PiDownloadSimpleBold />
-                      </i>
-                      Download
-                    </a>
-                  </td>
-                  <td className="p-2">
-                    <button onClick={() => { handleUpdate(row.id); handleModalOpen() }}>
-                      <i>
-                        <AiOutlineEdit />
-                      </i>
-                    </button>
-                  </td>
-                  <td className="p-2">
-                    <button onClick={() => handleDelete(row.id)}>
-                      <i>
-                        <AiOutlineDelete />
-                      </i>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className=' cursor-pointer text-end mt-4 text-white'>
-          <a href="##" onClick={handleModalOpen} className='bg-[#244c63ad] px-4 my-2 w-44 py-2 border'>নতুন সংযোগ </a>
-        </div>
+        {/* showing error messages and loading */}
+        {isLoading && (
+          <div className="flex justify-center items-center py-4">
+            <Spinner />
+          </div>
+        )}
+        {!isLoading && admission_circular_data?.length === 0 && (
+          <div className="flex justify-center items-center py-4">
+            <ErrorMsg msg="No data found" />
+          </div>
+        )}
+        {isError && (
+          <div className="flex justify-center items-center py-4">
+            <ErrorMsg msg={error.message} />
+          </div>
+        )}
       </div>
 
-
       {/* Modal Popup */}
-      {isModalOpen && (
-        <div className="modal-container">
-          <div className="modal shadow absolute top-10  bg-[#FFFFFF]  border p-14 max-w-96 ">
-            <div className="modal-content">
-
-              <span className="close cursor-pointer border bg-[#111] px-4 text-end py-1 text-white absolute right-2 top-2" onClick={handleModalClose}><a href="##"><i className='py-8 text-2xl '><RxCross2 /></i></a></span>
-
-              {/* Table Form content goes here */}
-              <div className='mt-10'>
-                <form>
-
-                  <div className="form-group flex flex-wrap my-2 items-center ">
-                    <label htmlFor="title" className='pr-4 w-44'>ভর্তি বিজ্ঞপ্তি টাইটেলঃ</label>
-                    <input className='outline-none px-4 py-2 bg-[#F3F3F3]' type="text" id="title" name="title" placeholder="ভর্তি বিজ্ঞপ্তি টাইটেল" />
-                  </div>
-
-                  <div className="form-group flex flex-wrap my-2 items-center">
-                    <label htmlFor="date" className='pr-4 w-44'>প্রকাশের তারিখঃ</label>
-                    <DatePicker
-                      selected={selectedDate}
-                      onChange={handleDateChange}
-                      dateFormat="dd/MM/yyyy"
-                      placeholderText="তারিখ"
-                      className='outline-none px-4 py-2 bg-[#F3F3F3]'
-                    />
-                  </div>
-
-                  <div className="form-group my-4">
-                    <label htmlFor="image" className='pr-4 w-32'>ভর্তি বিজ্ঞপ্তি পিডিএফঃ</label>
-                    <input type="file"
-                      id="file"
-                      name="file"
-                      accept="image/*,.pdf, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                      selected={selectedImage}
-                      onChange={handleFileChange} />
-                  </div>
-
-                  <div className="text-center mt-14 text-black">
-                    <button type="submit" className='bg-[#c5dfe77a] px-12 py-4'>সংযোগ করুন</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Add More Content Button */}
-      {isModalOpen && (
-        <div className="overlay"></div>
+      {isCreateModalOpen && <div className="overlay"></div>}
+
+      {isCreateModalOpen && (
+        <CreateModal
+          handleModalClose={handleModalClose}
+          keyword={"admission circular"}
+          type={"admission circular"}
+          heading={{
+            title: "ভর্তি বিজ্ঞপ্তি শিরোনাম",
+            pdf: "ভর্তি বিজ্ঞপ্তি পিডিএফ",
+            img: "ভর্তি বিজ্ঞপ্তি ছবি",
+            desc: "ভর্তি বিজ্ঞপ্তি বর্ণনা",
+          }}
+        />
       )}
     </>
   );
