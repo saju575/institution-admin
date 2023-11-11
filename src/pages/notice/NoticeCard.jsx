@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
+import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
+import { deleteNews } from "../../utills/deleteNews";
 import { formatDate } from "../../utills/formatDate";
 
 const NoticeCard = ({ notice, refetch }) => {
   const navigate = useNavigate();
 
+  // Modal popup state For confirmation
+
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+  /* 
+    confirm modal handler
+  */
+  const openModal = () => {
+    setIsConfirmModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsConfirmModalOpen(false);
+  };
+
+  /* 
+    client query
+  */
+  const queryClient = useQueryClient();
+
+  /* 
+    delete mutation
+  */
+  const { mutateAsync: deleteMutate, isLoading } = useMutation({
+    mutationFn: (id) => deleteNews(id),
+    onSuccess: async () => {
+      // refetch();
+      queryClient.invalidateQueries();
+      closeModal();
+    },
+  });
+
+  /* 
+        delete item handler
+      */
+  const handleDeleteItem = async () => {
+    await deleteMutate(notice._id);
+  };
   return (
     <>
       <div className="bg-[#F1EFEF] flex flex-wrap justify-between m-2  items-center">
@@ -28,11 +69,27 @@ const NoticeCard = ({ notice, refetch }) => {
           <button className="bg-[#EBE4D1] mr-2 text-black px-4 my-1 py-2">
             আপডেট
           </button>
-          <button className="bg-[#CE5A67] mr-2 text-white px-4 my-1 py-2">
+          <button
+            onClick={openModal}
+            className="bg-[#CE5A67] mr-2 text-white px-4 my-1 py-2"
+          >
             মুছুন
           </button>
         </div>
       </div>
+
+      {/* overley  */}
+      {isConfirmModalOpen && <div className="overlay"></div>}
+
+      {/* Confirm Modal Popup */}
+      {isConfirmModalOpen && (
+        <ConfirmationModal
+          isOpen={isConfirmModalOpen}
+          onCancel={closeModal}
+          onConfirm={handleDeleteItem}
+          isLoading={isLoading}
+        />
+      )}
     </>
   );
 };

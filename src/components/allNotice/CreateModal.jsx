@@ -48,7 +48,7 @@ const CreateModal = ({
   const { mutateAsync, isLoading, isError, error } = useMutation({
     mutationFn: (data) => createNews(data),
     onSuccess: async () => {
-      queryClient.invalidateQueries(keyword); // invalidate
+      queryClient.invalidateQueries(); // invalidate
       handleModalClose();
     },
   });
