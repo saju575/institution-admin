@@ -84,7 +84,7 @@ const CreateModal = ({
   /* return component */
   return (
     <div className="modal-container">
-      <div className="modal shadow absolute top-10  bg-[#FFFFFF]  border p-14 max-w-96 ">
+      <div className="modal shadow absolute top-10  bg-[#FFFFFF] p-6  border sm:p-14 w-[350px] sm:w-[600px]">
         <div className="modal-content">
           <span
             className="close cursor-pointer border bg-[#111] px-4 text-end py-1 text-white absolute right-2 top-2"
@@ -141,7 +141,7 @@ const CreateModal = ({
               )}
 
               <div className="form-group my-4">
-                <label htmlFor="image" className="pr-4 w-32">
+                <label htmlFor="pdf" className="pr-4 w-32">
                   {heading.pdf}(ঐচ্ছিক):
                 </label>
                 <input

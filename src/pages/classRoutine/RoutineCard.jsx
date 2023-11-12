@@ -5,13 +5,16 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { PiDownloadSimpleBold } from "react-icons/pi";
 import { useMutation, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
+import UpdateModal from "../../components/allNotice/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
 import { deleteNews } from "../../utills/deleteNews";
 
 const RoutineCard = ({ routine, refetch }) => {
   //  popup state For Confirmation Modal
-
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+  // state For Update Modal
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
 
   /* 
     confirm modal handler
@@ -22,6 +25,17 @@ const RoutineCard = ({ routine, refetch }) => {
 
   const closeModal = () => {
     setIsConfirmModalOpen(false);
+  };
+
+  /* 
+    update modal handler
+  */
+  const handleUpdateModalOpen = () => {
+    setUpdateModalOpen(true);
+  };
+
+  const handleUpdateModalClose = () => {
+    setUpdateModalOpen(false);
   };
 
   /* 
@@ -99,14 +113,18 @@ const RoutineCard = ({ routine, refetch }) => {
             </a>
           )}
         </td>
+
+        {/* update btn */}
         <td className="p-2">
-          <button>
+          <button onClick={handleUpdateModalOpen}>
             {" "}
             <i>
               <AiOutlineEdit />
             </i>
           </button>
         </td>
+
+        {/* delete btn */}
         <td className="p-2">
           <button onClick={openModal}>
             <i>
@@ -117,7 +135,23 @@ const RoutineCard = ({ routine, refetch }) => {
       </tr>
 
       {/* overley  */}
-      {isConfirmModalOpen && <div className="overlay"></div>}
+      {(isConfirmModalOpen || isUpdateModalOpen) && (
+        <div className="overlay"></div>
+      )}
+
+      {/* update modal popup */}
+      {isUpdateModalOpen && (
+        <UpdateModal
+          handleModalClose={handleUpdateModalClose}
+          id={routine._id}
+          heading={{
+            title: "ক্লাস রুটিন শিরোনাম",
+            pdf: "ক্লাস রুটিন পিডিএফ",
+            img: "ক্লাস রুটিন ছবি",
+            desc: "বর্ণনা",
+          }}
+        />
+      )}
 
       {/* Confirm Modal Popup */}
       {isConfirmModalOpen && (

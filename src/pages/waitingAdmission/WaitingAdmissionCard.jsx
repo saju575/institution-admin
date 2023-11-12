@@ -5,6 +5,7 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { PiDownloadSimpleBold } from "react-icons/pi";
 import { useMutation, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
+import UpdateModal from "../../components/allNotice/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
 import { deleteNews } from "../../utills/deleteNews";
 
@@ -12,6 +13,20 @@ const WaitingAdmissionCard = ({ notice, refetch }) => {
   // Modal popup state For confirmation
 
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+  // state For Update Modal
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+
+  /* 
+     update modal handler
+   */
+  const handleUpdateModalOpen = () => {
+    setUpdateModalOpen(true);
+  };
+
+  const handleUpdateModalClose = () => {
+    setUpdateModalOpen(false);
+  };
 
   /* 
     confirm modal handler
@@ -94,13 +109,17 @@ const WaitingAdmissionCard = ({ notice, refetch }) => {
             </a>
           )}
         </td>
+
+        {/* update btn */}
         <td className="p-2">
-          <button>
+          <button onClick={handleUpdateModalOpen}>
             <i>
               <AiOutlineEdit />
             </i>
           </button>
         </td>
+
+        {/* delete btn */}
         <td className="p-2">
           <button onClick={openModal}>
             <i>
@@ -111,7 +130,23 @@ const WaitingAdmissionCard = ({ notice, refetch }) => {
       </tr>
 
       {/* overley  */}
-      {isConfirmModalOpen && <div className="overlay"></div>}
+      {(isConfirmModalOpen || isUpdateModalOpen) && (
+        <div className="overlay"></div>
+      )}
+
+      {/* update modal popup */}
+      {isUpdateModalOpen && (
+        <UpdateModal
+          handleModalClose={handleUpdateModalClose}
+          id={notice._id}
+          heading={{
+            title: "অপেক্ষমান শিক্ষার্থীর শিরোনাম",
+            pdf: "অপেক্ষমান শিক্ষার্থীর পিডিএফ",
+            img: "অপেক্ষমান শিক্ষার্থীর ছবি",
+            desc: "বর্ণনা",
+          }}
+        />
+      )}
 
       {/* Confirm Modal Popup */}
       {isConfirmModalOpen && (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
+import UpdateModal from "../../components/allNotice/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
 import { deleteNews } from "../../utills/deleteNews";
 import { formatDate } from "../../utills/formatDate";
@@ -11,6 +12,20 @@ const NoticeCard = ({ notice, refetch }) => {
   // Modal popup state For confirmation
 
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+  // state For Update Modal
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+
+  /* 
+    update modal handler
+  */
+  const handleUpdateModalOpen = () => {
+    setUpdateModalOpen(true);
+  };
+
+  const handleUpdateModalClose = () => {
+    setUpdateModalOpen(false);
+  };
 
   /* 
     confirm modal handler
@@ -66,7 +81,10 @@ const NoticeCard = ({ notice, refetch }) => {
           </div>
         </div>
         <div className="flex mt-3 justify-end flex-wrap">
-          <button className="bg-[#EBE4D1] mr-2 text-black px-4 my-1 py-2">
+          <button
+            onClick={handleUpdateModalOpen}
+            className="bg-[#EBE4D1] mr-2 text-black px-4 my-1 py-2"
+          >
             আপডেট
           </button>
           <button
@@ -79,7 +97,23 @@ const NoticeCard = ({ notice, refetch }) => {
       </div>
 
       {/* overley  */}
-      {isConfirmModalOpen && <div className="overlay"></div>}
+      {(isConfirmModalOpen || isUpdateModalOpen) && (
+        <div className="overlay"></div>
+      )}
+
+      {/* update modal popup */}
+      {isUpdateModalOpen && (
+        <UpdateModal
+          handleModalClose={handleUpdateModalClose}
+          id={notice._id}
+          heading={{
+            title: "নোটিশ শিরোনাম",
+            pdf: "নোটিশ পিডিএফ",
+            img: "নোটিশ ছবি",
+            desc: "বর্ণনা",
+          }}
+        />
+      )}
 
       {/* Confirm Modal Popup */}
       {isConfirmModalOpen && (

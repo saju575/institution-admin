@@ -33,6 +33,7 @@ const News = () => {
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ["urgent news"],
+    staleTime: Infinity,
     queryFn: ({ pageParam }) =>
       getAllNews({ page: pageParam, limit: 10, priority: "urgent" }),
     getNextPageParam: (lastPage) => {

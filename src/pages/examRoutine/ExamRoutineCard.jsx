@@ -5,6 +5,7 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { PiDownloadSimpleBold } from "react-icons/pi";
 import { useMutation, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
+import UpdateModal from "../../components/allNotice/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
 import { deleteNews } from "../../utills/deleteNews";
 
@@ -12,6 +13,20 @@ const ExamRoutineCard = ({ routine, refetch }) => {
   // Modal popup state For confirmation
 
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+  // state For Update Modal
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+
+  /* 
+    update modal handler
+  */
+  const handleUpdateModalOpen = () => {
+    setUpdateModalOpen(true);
+  };
+
+  const handleUpdateModalClose = () => {
+    setUpdateModalOpen(false);
+  };
 
   /* 
     confirm modal handler
@@ -96,14 +111,18 @@ const ExamRoutineCard = ({ routine, refetch }) => {
             </a>
           )}
         </td>
+
+        {/* edit button */}
         <td className="p-2">
-          <button>
+          <button onClick={handleUpdateModalOpen}>
             {" "}
             <i>
               <AiOutlineEdit />
             </i>
           </button>
         </td>
+
+        {/* delete button */}
         <td className="p-2">
           <button onClick={openModal}>
             <i>
@@ -114,7 +133,23 @@ const ExamRoutineCard = ({ routine, refetch }) => {
       </tr>
 
       {/* overley  */}
-      {isConfirmModalOpen && <div className="overlay"></div>}
+      {(isConfirmModalOpen || isUpdateModalOpen) && (
+        <div className="overlay"></div>
+      )}
+
+      {/* update modal popup */}
+      {isUpdateModalOpen && (
+        <UpdateModal
+          handleModalClose={handleUpdateModalClose}
+          id={routine._id}
+          heading={{
+            title: "পরিক্ষা রুটিন শিরোনাম",
+            pdf: "পরিক্ষা রুটিন পিডিএফ",
+            img: "পরিক্ষা রুটিন ছবি",
+            desc: "বর্ণনা",
+          }}
+        />
+      )}
 
       {/* Confirm Modal Popup */}
       {isConfirmModalOpen && (
