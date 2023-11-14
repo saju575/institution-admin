@@ -110,8 +110,8 @@ const UpdateModal = ({ handleModalClose, id, heading, keyword }) => {
   //   console.log(formik.errors);
   return (
     <div className="modal-container">
-      <div className="modal shadow absolute top-10  bg-[#FFFFFF]  border p-14  ">
-        <div className="modal-content md:w-[400px]">
+      <div className="modal shadow absolute top-10 w-[350px] sm:w-[500px] bg-[#FFFFFF]  border p-14  ">
+        <div className="modal-content">
           <span
             className="close cursor-pointer border bg-[#111] px-4 text-end py-1 text-white absolute right-2 top-2"
             onClick={handleModalClose}

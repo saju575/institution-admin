@@ -12,7 +12,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div id="blankMap">
           <div className="container mx-auto">
-            <div className="home-background border bg-[#ececec90] p-2 relative">
+            <div className="home-background border min-h-screen bg-[#ececec90] p-2 relative">
               <RouterProvider router={reactRouter} />
             </div>
           </div>

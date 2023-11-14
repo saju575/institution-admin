@@ -54,7 +54,7 @@ const ExamRoutine = () => {
 
   return (
     <>
-      <div id="classRoutine" className="my-4">
+      <div id="classRoutine" className="">
         {/* Section Title */}
         <div className="teachers-title">
           <h3 className="bg-[#79929C] text-white font-medium text-md p-4 mb-3">

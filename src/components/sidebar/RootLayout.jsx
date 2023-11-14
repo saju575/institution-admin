@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Topbar from "../topbar/Topbar";
 import Sidebar from "./Sidebar";
-
-import { useLocation } from "react-router-dom";
+import styles from "./rootLayout.module.css";
 
 const RootLayout = () => {
   const location = useLocation();
@@ -22,12 +21,17 @@ const RootLayout = () => {
       </div>
     );
   }
+
   return (
     <div>
       <Topbar menuVisible={isSidebarOpen} toggleMenu={toggleSidebar} />
 
-      <Sidebar isSidebarOpen={isSidebarOpen} removeSidebar={toggleSidebar} />
-      <Outlet />
+      <div className="lg:flex">
+        <Sidebar isSidebarOpen={isSidebarOpen} removeSidebar={toggleSidebar} />
+        <div className={`${styles.outlet}`}>
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };

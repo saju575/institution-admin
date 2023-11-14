@@ -1,0 +1,9 @@
+.outlet {
+  width: calc(100% - 370px);
+}
+
+@media (max-width: 1024px) {
+  .outlet {
+    width: 100%;
+  }
+}

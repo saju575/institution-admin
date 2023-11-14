@@ -1,8 +1,8 @@
 #adminSidebar {
-  min-height: 86vh;
+  min-height: calc(100vh - 123px);
   width: 350px;
   background: #ffffff;
-  float: left;
+  /* float: left; */
 }
 
 .adminNavbar-link a.active {
@@ -44,16 +44,17 @@
 
 /* Admin Responsive Sidebar  */
 
-#adminResponsiveSidebar {
+/* #adminResponsiveSidebar {
   background: #ffffff;
   float: left;
   position: absolute;
   top: 123px;
-  /* left: -350px; */
-  height: 100vh;
-  width: 350px;
-}
+ 
+  min-height: calc(100vh - 123px);
+  width: 360px;
+} */
 
+/* left: -350px; */
 /* Modal Content */
 
 .modal {
@@ -73,9 +74,11 @@
 /* new sidebar */
 
 .sidebar {
-  width: 300px;
-  min-height: 100vh;
-
+  width: 330px;
+  height: calc(100vh - 5px);
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
   position: absolute;
   left: -480px;
   z-index: 99;

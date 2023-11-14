@@ -54,7 +54,7 @@ const Events = () => {
 
   return (
     <React.Fragment>
-      <div className="detailEvents-title mt-4">
+      <div className="detailEvents-title">
         <h3 className="bg-[#79929C] text-white font-medium text-md p-4 mb-2">
           ইভেন্টস
         </h3>

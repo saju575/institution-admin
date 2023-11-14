@@ -53,7 +53,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
       {/* Large Device Sidebar */}
       <div
         id="adminSidebar"
-        className="adminSidebar hidden lg:block relative mr-5 shadow mt-2"
+        className="adminSidebar hidden lg:block relative mr-5 shadow "
       >
         <div className="p-8 top-34">
           {/* 1st Sidebar Nav Item */}
@@ -324,7 +324,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
           )}
 
           {/* Logout Icon */}
-          <div className="absolute bottom-4 left-4 mt-4 text-center">
+          <div className="mt-4 text-center">
             <ul>
               <li className="flex">
                 <a href="##" className="flex items-center">
@@ -344,7 +344,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
         <div
           className={`sidebar bg-slate-300  ${
             isSidebarOpen ? "open" : ""
-          } ml-2 p-5 pt-14  mt-2`}
+          } ml-2 p-5 pt-14 `}
         >
           {/* Dropdown Sidebar Menu 1 */}
           <div

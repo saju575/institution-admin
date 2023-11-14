@@ -54,7 +54,7 @@ const SeekingAdmission = () => {
   return (
     <>
       {/* Section Title */}
-      <div className="teachers-title mt-4">
+      <div className="teachers-title">
         <h3 className="bg-[#79929C] text-white font-medium text-md p-4 mb-3">
           ভর্তি নির্বাচিত শিক্ষার্থীর তালিকা
         </h3>

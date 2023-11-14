@@ -56,7 +56,7 @@ const UploadResult = () => {
 
   return (
     <>
-      <div className=" mt-4">
+      <div>
         <h2 className="text-lg sm:text-xl text-white bg-[#244c63ad] py-4 pl-4">
           রেজাল্ট ফাইল আপলোড করুন (.xlsx)
         </h2>

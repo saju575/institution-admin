@@ -54,9 +54,9 @@ const AdmissionNotice = () => {
 
   return (
     <>
-      <div id="classRoutine" className="my-4">
+      <div id="classRoutine">
         {/* Section Title */}
-        <div className="teachers-title mt-4">
+        <div className="teachers-title">
           <h3 className="bg-[#79929C] text-white font-medium text-md p-4 mb-3">
             ভর্তি বিজ্ঞপ্তি
           </h3>

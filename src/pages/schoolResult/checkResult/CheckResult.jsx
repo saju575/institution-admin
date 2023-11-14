@@ -91,7 +91,7 @@ const CheckResult = () => {
   });
 
   return (
-    <div className="mt-4">
+    <div>
       <h2 className="text-lg sm:text-xl text-white bg-[#244c63ad] py-4 pl-4">
         স্কুল রেজাল্ট
       </h2>

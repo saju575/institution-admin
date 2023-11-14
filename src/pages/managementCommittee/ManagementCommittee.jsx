@@ -63,7 +63,7 @@ const ManagementCommittee = () => {
     <div>
       {isModalOpen && <div className="overlay"></div>}
       <div id="teachers">
-        <div className="teachers-title mt-4">
+        <div className="teachers-title">
           <h3 className="bg-[#79929C] text-white font-medium text-md p-4">
             পরিচালনা কমিটি
           </h3>

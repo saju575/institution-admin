@@ -56,7 +56,7 @@ const News = () => {
     <React.Fragment>
       <div id="NewsAdminPanel" className="bg-[#FFFFFF]">
         <div className="teachers-title">
-          <h3 className="bg-[#79929C] text-white font-medium text-md mt-4 py-4 pl-4">
+          <h3 className="bg-[#79929C] text-white font-medium text-md  py-4 pl-4">
             জরুরী নিউজঃ
           </h3>
         </div>
