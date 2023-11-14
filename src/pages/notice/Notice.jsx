@@ -34,7 +34,7 @@ const Notice = () => {
   } = useInfiniteQuery({
     queryKey: ["allNews"],
     staleTime: Infinity,
-    queryFn: ({ pageParam = 1 }) => getAllNews({ limit: 10, page: pageParam }),
+    queryFn: ({ pageParam = 1 }) => getAllNews({ limit: 45, page: pageParam }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -62,7 +62,6 @@ const Notice = () => {
       {/* Add More Content Button */}
       <div className="mb-4 cursor-pointer text-end my-6 mr-2 text-white">
         <span
-          href="##"
           onClick={handleModalOpen}
           className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
         >
@@ -73,7 +72,11 @@ const Notice = () => {
       {/* 
         render data
       */}
-      <div className="py-5 pl-0 lg:pl-10 bg-[#FFFFFF] mt-4 shadow-lg">
+      <div
+        id="scrollableterget"
+        className="py-5 pl-0 lg:pl-10 bg-[#FFFFFF] mt-4 shadow-lg"
+        // style={{ height: "100vh", overflowY: "auto" }}
+      >
         {notices?.length > 0 && (
           <InfiniteScroll
             dataLength={notices?.length > 0 ? notices.length : 0}
@@ -84,6 +87,7 @@ const Notice = () => {
                 <Spinner />
               </div>
             }
+            scrollableTarget="scrollableterget"
           >
             {notices.map((notice, index) => (
               <NoticeCard key={index} notice={notice} refetch={refetch} />

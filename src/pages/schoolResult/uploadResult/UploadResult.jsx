@@ -36,7 +36,7 @@ const UploadResult = () => {
     queryFn: ({ pageParam }) =>
       getAllResults({
         page: pageParam,
-        limit: 10,
+        limit: 60,
       }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
@@ -84,6 +84,7 @@ const UploadResult = () => {
                     <Spinner />
                   </div>
                 }
+                scrollableTarget="scrollableterget"
                 className="thin-scrollbar"
               >
                 <table className="border-collapse w-full min-w-[1000px]">

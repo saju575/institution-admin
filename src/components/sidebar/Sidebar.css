@@ -1,7 +1,8 @@
 #adminSidebar {
-  min-height: calc(100vh - 123px);
+  height: calc(100vh - 122px);
   width: 350px;
   background: #ffffff;
+  overflow-y: auto;
   /* float: left; */
 }
 

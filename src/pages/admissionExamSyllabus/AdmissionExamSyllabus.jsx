@@ -35,7 +35,7 @@ const AdmissionExamSyllabus = () => {
     staleTime: Infinity,
     queryKey: ["admission syllabus"],
     queryFn: ({ pageParam }) =>
-      getAllNews({ page: pageParam, limit: 10, type: "admission syllabus" }),
+      getAllNews({ page: pageParam, limit: 60, type: "admission syllabus" }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -88,6 +88,7 @@ const AdmissionExamSyllabus = () => {
                   <Spinner />
                 </div>
               }
+              scrollableTarget="scrollableterget"
               className="thin-scrollbar"
             >
               <table className="border-collapse w-full min-w-[1000px]">

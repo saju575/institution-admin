@@ -35,7 +35,7 @@ const ExamRoutine = () => {
     staleTime: Infinity,
     queryKey: ["exam routine"],
     queryFn: ({ pageParam }) =>
-      getAllNews({ page: pageParam, limit: 10, type: "exam routine" }),
+      getAllNews({ page: pageParam, limit: 60, type: "exam routine" }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -84,6 +84,7 @@ const ExamRoutine = () => {
                   <Spinner />
                 </div>
               }
+              scrollableTarget="scrollableterget"
               className="thin-scrollbar"
             >
               <table className="border-collapse w-full min-w-[1000px]">

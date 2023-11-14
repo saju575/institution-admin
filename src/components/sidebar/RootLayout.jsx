@@ -28,8 +28,14 @@ const RootLayout = () => {
 
       <div className="lg:flex">
         <Sidebar isSidebarOpen={isSidebarOpen} removeSidebar={toggleSidebar} />
-        <div className={`${styles.outlet}`}>
-          <Outlet />
+        <div
+          id="scrollableterget" // Please don't remove this id. This will cause problems in infinite scrolling
+          className={`${styles.outlet} overflow-y-auto`}
+          style={{ height: "calc(100vh - 122px)" }}
+        >
+          <div className="">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

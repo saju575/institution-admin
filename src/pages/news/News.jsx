@@ -35,7 +35,7 @@ const News = () => {
     queryKey: ["urgent news"],
     staleTime: Infinity,
     queryFn: ({ pageParam }) =>
-      getAllNews({ page: pageParam, limit: 10, priority: "urgent" }),
+      getAllNews({ page: pageParam, limit: 55, priority: "urgent" }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -85,6 +85,7 @@ const News = () => {
                 <Spinner />
               </div>
             }
+            scrollableTarget="scrollableterget"
             className="currentNews pl-4"
           >
             {urgentNews.map((item, index) => (

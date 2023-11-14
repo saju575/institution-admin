@@ -297,8 +297,8 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
           <div className="mt-10">
             {/* info update form */}
             <form onSubmit={infoFormik.handleSubmit}>
-              <div className="form-group flex flex-wrap my-2 items-center ">
-                <label htmlFor="title" className="pr-4 w-44">
+              <div className="form-group flex sm:flex-row flex-col my-2 sm:items-center ">
+                <label htmlFor="title" className="pr-4 w-52">
                   {heading.title}:
                 </label>
                 <input
@@ -319,7 +319,7 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center">
-                <label htmlFor="priority" className="pr-4 w-44">
+                <label htmlFor="priority" className="pr-4 w-52">
                   Priority:
                 </label>
                 <select

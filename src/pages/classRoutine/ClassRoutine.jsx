@@ -34,7 +34,7 @@ const ClassRoutine = () => {
     staleTime: Infinity,
     queryKey: ["classRoutine"],
     queryFn: ({ pageParam }) =>
-      getAllNews({ page: pageParam, limit: 10, type: "class routine" }),
+      getAllNews({ page: pageParam, limit: 55, type: "class routine" }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -83,6 +83,7 @@ const ClassRoutine = () => {
                   <Spinner />
                 </div>
               }
+              scrollableTarget="scrollableterget"
               className="thin-scrollbar"
             >
               <table className="border-collapse w-full min-w-[1000px]">

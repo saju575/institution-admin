@@ -1,5 +1,6 @@
+import { FaArrowLeft } from "react-icons/fa6";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ErrorMsg from "../../components/errorMsg/ErrorMsg";
 import Spinner from "../../components/spinner/Spinner";
 import { formatDate } from "../../utills/formatDate";
@@ -7,12 +8,17 @@ import { getNews } from "../../utills/getNews";
 
 const NoticeDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery({
     queryFn: () => getNews(id),
     queryKey: ["notice", { id }],
   });
 
+  /* Go back handler */
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   /* 
         render content
     */
@@ -41,16 +47,17 @@ const NoticeDetails = () => {
       <>
         <div className="flex justify-between items-center">
           <h4 className="font-medium py-4 w-max">{title}</h4>
-          <p>
+          <p className="font-medium">
             Published:{" "}
             {`${formatDate(updatedAt).date} ${formatDate(updatedAt).year}`}
           </p>
         </div>
 
+        {desc && (
+          <div className="py-4" dangerouslySetInnerHTML={{ __html: desc }} />
+        )}
+
         <div className="flex flex-col items-center justify-center gap-6">
-          {desc && (
-            <div className="py-4" dangerouslySetInnerHTML={{ __html: desc }} />
-          )}
           {image?.url && (
             <img
               src={image.url}
@@ -61,6 +68,7 @@ const NoticeDetails = () => {
           )}
           {pdf?.url && (
             <iframe
+              className="custom-scrollbar"
               title="PDF Viewer"
               src={pdf.url}
               // maxWidth="100%"
@@ -78,7 +86,19 @@ const NoticeDetails = () => {
 
   return (
     <>
-      <div className="noticeDetails">{content}</div>
+      <div className="noticeDetails">
+        <div
+          className="cursor-pointer bg-[#244c63ad] text-white px-4 flex items-center justify-center gap-x-3 w-44 py-2 border"
+          onClick={handleGoBack}
+        >
+          <span>
+            <FaArrowLeft />
+          </span>
+          ফিরে যাও
+        </div>
+
+        {content}
+      </div>
     </>
   );
 };

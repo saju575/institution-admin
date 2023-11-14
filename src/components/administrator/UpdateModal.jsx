@@ -29,11 +29,7 @@ const UpdateModal = ({ handleModalClose, id }) => {
   /* 
     fetch the particular id data
   */
-  const {
-    data,
-    refetch,
-    isLoading: isItemLoading,
-  } = useQuery({
+  const { data, refetch } = useQuery({
     queryFn: () => getSingleAdministrator(id),
     queryKey: ["single administrator", { id }],
   });
@@ -119,7 +115,7 @@ const UpdateModal = ({ handleModalClose, id }) => {
           </span>
 
           {/* Image content goes here */}
-          {!isItemLoading && data && (
+          {
             <div className="mt-10">
               <div className="flex flex-col justify-center items-center mb-6">
                 <div className="relative  border-2 border-dashed border-slate-300 rounded-lg  w-48 h-48">
@@ -233,7 +229,7 @@ const UpdateModal = ({ handleModalClose, id }) => {
                 </div>
               </form>
             </div>
-          )}
+          }
         </div>
       </div>
     </div>

@@ -34,7 +34,7 @@ const Workers = () => {
     staleTime: Infinity,
     queryKey: ["staff"],
     queryFn: ({ pageParam = 1 }) =>
-      getAdministrators({ limit: 10, page: pageParam, role: "staff" }),
+      getAdministrators({ limit: 50, page: pageParam, role: "staff" }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -81,6 +81,7 @@ const Workers = () => {
                 <Spinner />
               </div>
             }
+            scrollableTarget="scrollableterget"
             className="teachers-card grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3"
           >
             {staffsData.map((worker, index) => (

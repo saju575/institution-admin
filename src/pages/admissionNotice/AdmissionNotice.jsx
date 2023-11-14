@@ -35,7 +35,7 @@ const AdmissionNotice = () => {
     staleTime: Infinity,
     queryKey: ["admission circular"],
     queryFn: ({ pageParam }) =>
-      getAllNews({ page: pageParam, limit: 10, type: "admission circular" }),
+      getAllNews({ page: pageParam, limit: 60, type: "admission circular" }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -88,6 +88,7 @@ const AdmissionNotice = () => {
                   <Spinner />
                 </div>
               }
+              scrollableTarget="scrollableterget"
               className="thin-scrollbar"
             >
               <table className="border-collapse w-full min-w-[1000px]">

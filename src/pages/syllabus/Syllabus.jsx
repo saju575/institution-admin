@@ -34,7 +34,7 @@ const Syllabus = () => {
     staleTime: Infinity,
     queryKey: ["syllabus"],
     queryFn: ({ pageParam }) =>
-      getAllNews({ page: pageParam, limit: 10, type: "syllabus" }),
+      getAllNews({ page: pageParam, limit: 60, type: "syllabus" }),
     getNextPageParam: (lastPage) => {
       if (lastPage.payload.currentPage < lastPage.payload.totalPages) {
         return lastPage.payload.currentPage + 1;
@@ -83,6 +83,7 @@ const Syllabus = () => {
                   <Spinner />
                 </div>
               }
+              scrollableTarget="scrollableterget"
               className="thin-scrollbar"
             >
               <table className="border-collapse w-full min-w-[1000px]">

@@ -36,7 +36,7 @@ const WaitingAdmission = () => {
     queryFn: ({ pageParam }) =>
       getAllNews({
         page: pageParam,
-        limit: 10,
+        limit: 60,
         type: "admission waiting result",
       }),
     getNextPageParam: (lastPage) => {
@@ -92,6 +92,7 @@ const WaitingAdmission = () => {
                   <Spinner />
                 </div>
               }
+              scrollableTarget="scrollableterget"
               className="thin-scrollbar"
             >
               <table className="border-collapse w-full min-w-[1000px]">

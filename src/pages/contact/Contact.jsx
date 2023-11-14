@@ -35,7 +35,7 @@ const Contact = () => {
 
   return (
     <React.Fragment>
-      <div id="contactAdminPanel" className="bg-[#FFFFFF]">
+      <div id="contactAdminPanel" className="">
         {/* Section title */}
         <div className="teachers-title ">
           <h3 className="bg-[#79929C] text-white font-medium text-md p-4 mb-3">
