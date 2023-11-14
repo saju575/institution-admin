@@ -12,7 +12,11 @@ const MarksSheet = ({ result, handleResult }) => {
         >
           <div className="flex items-center">
             <picture className="pr-5 max-[767px]:pr-0">
-              <img src="/assets/logo.png" alt="logo" className="w-auto" />
+              <img
+                src="/assets/logo.png"
+                alt="logo"
+                className="w-16 h-16 md:w-24 md:h-24"
+              />
             </picture>
             <div>
               <h2 className="max-[767px]:text-xl md:text-2xl font-semibold mt-2">

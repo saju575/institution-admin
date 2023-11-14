@@ -62,7 +62,7 @@ const UploadResult = () => {
         </h2>
 
         {/* add btn */}
-        <div className=" cursor-pointer text-end mt-4 text-white">
+        <div className="cursor-pointer text-end mt-4 text-white">
           <span
             onClick={handleModalOpen}
             className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
@@ -73,7 +73,7 @@ const UploadResult = () => {
 
         {/* CSV File Area */}
         <div id="classRoutine" className="my-4">
-          <div className="border vertical-scrollMain bg-[#DBE8E960]">
+          <div className="border bg-[#DBE8E960]">
             {results?.length > 0 && (
               <InfiniteScroll
                 dataLength={results?.length > 0 ? results.length : 0}
@@ -84,18 +84,22 @@ const UploadResult = () => {
                     <Spinner />
                   </div>
                 }
+                className="thin-scrollbar"
               >
-                <table className="border-collapse w-full vertical-scroll">
+                <table className="border-collapse w-full min-w-[1000px]">
                   <thead>
                     <tr className="bg-[#BBCDCD60]">
-                      <th className="p-2 text-start w-2/12">প্রকাশের তারিখ</th>
-                      <th className="p-2 text-start w-4/12">নোটিশ</th>
-                      <th className="p-2 text-start w-3/12">টার্ম</th>
-                      <th className="p-2 text-start w-1/12">শ্রেণি</th>
-                      <th className="p-2 text-start w-1/12">শাখা</th>
-                      <th className="p-2 text-start w-1/12">বিভাগ</th>
-                      <th className="p-2 w-2/12">সম্পাদনা</th>
-                      <th className="p-2 text-start w-1/12">মুছুন</th>
+                      <th className="p-2 text-start min-w-max">
+                        প্রকাশের তারিখ
+                      </th>
+                      <th className="p-2 text-start min-w-max">নোটিশ</th>
+                      <th className="p-2 text-start min-w-max">টার্ম</th>
+                      <th className="p-2 text-start min-w-max">শ্রেণি</th>
+                      <th className="p-2 text-start min-w-max">শাখা</th>
+                      <th className="p-2 text-start min-w-max">বিভাগ</th>
+                      <th className="p-2 text-start min-w-max">বছর</th>
+                      <th className="p-2 min-w-max">সম্পাদনা</th>
+                      <th className="p-2 text-start min-w-max">মুছুন</th>
                     </tr>
                   </thead>
 

@@ -2,10 +2,10 @@
   font-family: "Hind Siliguri", sans-serif;
 } */
 
-.logoArea img {
+/* .logoArea img {
   height: 80px;
   width: 80px;
-}
+} */
 
 .logoArea h2 {
   color: #123d3d;
@@ -16,11 +16,11 @@
     text-align: center;
   }
 
-  .logoArea img {
+  /* .logoArea img {
     height: 63px;
     width: 100px;
     margin-bottom: 10px;
-  }
+  } */
 
   .logoArea div {
     text-align: center;

@@ -57,7 +57,7 @@ const UploadResultCard = ({ result, refetch }) => {
   return (
     <>
       <tr className="border-b">
-        <td className="flex items-center pt-2">
+        <td className="flex items-center min-w-max">
           <i className="p-2">
             <BsFillCalendarDateFill />
           </i>
@@ -65,14 +65,15 @@ const UploadResultCard = ({ result, refetch }) => {
             {moment(result.updatedAt).format("DD - MM - YYYY")}
           </p>
         </td>
-        <td className="p-2">{result.title}</td>
-        <td className="p-2">{result.examType}</td>
-        <td className="p-2">{result.classTitle}</td>
-        <td className="p-2">{result.section}</td>
-        <td className="p-2">{result?.group ? result.group : ""}</td>
+        <td className="p-2 min-w-max">{result.title}</td>
+        <td className="p-2 min-w-max">{result.examType}</td>
+        <td className="p-2 min-w-max">{result.classTitle}</td>
+        <td className="p-2 min-w-max">{result.section}</td>
+        <td className="p-2 min-w-max">{result?.group ? result.group : ""}</td>
+        <td className="p-2 min-w-max">{result?.year}</td>
 
         {/* update btn */}
-        <td className="p-2 text-center">
+        <td className="p-2 min-w-max text-center">
           <button onClick={handleUpdateModalOpen}>
             <i>
               <AiOutlineEdit />
@@ -81,7 +82,7 @@ const UploadResultCard = ({ result, refetch }) => {
         </td>
 
         {/* delete btn */}
-        <td className="p-2">
+        <td className="p-2 min-w-max">
           <button onClick={openModal}>
             <i>
               <AiOutlineDelete />

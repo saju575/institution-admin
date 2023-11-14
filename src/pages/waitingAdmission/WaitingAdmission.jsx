@@ -77,7 +77,7 @@ const WaitingAdmission = () => {
 
       {/* render data */}
       <div id="classRoutine" className="my-4">
-        <div className="border vertical-scrollMain bg-[#DBE8E960]">
+        <div className="border  bg-[#DBE8E960]">
           {admission_waiting_result?.length > 0 && (
             <InfiniteScroll
               dataLength={
@@ -92,17 +92,18 @@ const WaitingAdmission = () => {
                   <Spinner />
                 </div>
               }
+              className="thin-scrollbar"
             >
-              <table className="border-collapse w-full vertical-scroll">
+              <table className="border-collapse w-full min-w-[1000px]">
                 <thead>
                   <tr className="bg-[#BBCDCD60]">
-                    <th className="p-2 text-start w-3/12">প্রকাশের তারিখ</th>
-                    <th className="p-2 text-start w-5/12">নোটিশ</th>
-                    <th className="p-2 text-start w-2/12">ভিউ [PDF]</th>
-                    <th className="p-2 text-start w-2/12">ডাউনলোড[PDF]</th>
-                    <th className="p-2 text-start w-2/12">ডাউনলোড[Img]</th>
-                    <th className="p-2 text-start w-1/12">সম্পাদনা</th>
-                    <th className="p-2 text-start w-1/12">মুছুন</th>
+                    <th className="p-2 text-start min-w-max">প্রকাশের তারিখ</th>
+                    <th className="p-2 text-start min-w-max">নোটিশ</th>
+                    <th className="p-2 text-start min-w-max">ভিউ</th>
+                    <th className="p-2 text-start min-w-max">ডাউনলোড [PDF]</th>
+                    <th className="p-2 text-start min-w-max">ডাউনলোড [Img]</th>
+                    <th className="p-2 text-start min-w-max">সম্পাদনা</th>
+                    <th className="p-2 text-start min-w-max">মুছুন</th>
                   </tr>
                 </thead>
 
