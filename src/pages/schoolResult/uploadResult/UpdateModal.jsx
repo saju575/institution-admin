@@ -339,7 +339,7 @@ const UpdateModal = ({ handleModalClose, id, heading, keyword }) => {
                   }`}
                   disabled={isLoading}
                 >
-                  {!isLoading ? "সংযোগ করুন" : "Loadding..."}
+                  {!isLoading ? "আপডেট করুন" : "Loadding..."}
                 </button>
               </div>
             </form>

@@ -5,7 +5,6 @@ import { useMutation, useQueryClient } from "react-query";
 import * as Yup from "yup";
 import ErrorMsg from "../../../components/errorMsg/ErrorMsg";
 import { createStudentsResult } from "../../../utills/createStudentsResult";
-//   group: Yup.string().optional(),
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("শিরোনাম প্রয়োজন"),
@@ -100,7 +99,8 @@ const UploadModal = ({
       return errors;
     },
   });
-  //   console.log(formik.errors);
+
+  /* return component */
   return (
     <div className="modal-container">
       <div className="modal shadow absolute top-10  bg-[#FFFFFF]  border p-14  ">

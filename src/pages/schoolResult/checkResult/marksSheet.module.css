@@ -1,0 +1,63 @@
+/* * {
+  font-family: "Hind Siliguri", sans-serif;
+} */
+
+.logoArea img {
+  height: 80px;
+  width: 80px;
+}
+
+.logoArea h2 {
+  color: #123d3d;
+}
+
+@media (max-width: 767px) {
+  .logoArea {
+    text-align: center;
+  }
+
+  .logoArea img {
+    height: 63px;
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .logoArea div {
+    text-align: center;
+  }
+}
+
+/* Student Details */
+
+.studentDetailsTable tr td {
+  padding: 10px;
+  border: 1px solid #7978786b;
+}
+
+/* Marksheet Main Part */
+
+.marksheetMainPart {
+  margin-top: 10px;
+}
+
+.marksheetMainPart table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.marksheetMainPart th,
+.marksheetMainPart td {
+  padding: 10px;
+  border: 1px solid #7978786b;
+}
+
+@media (max-width: 767px) {
+  .marksheetTitle {
+    max-width: 100%;
+  }
+
+  .marksheetMainPart th,
+  .marksheetMainPart td {
+    font-size: 14px;
+  }
+}
