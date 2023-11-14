@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import * as Yup from "yup";
-import { deleteNewsFile } from "../../utills/deleteNews";
+import { deleteItem } from "../../utills/deleteItem";
 import { getNews } from "../../utills/getNews";
 import { updateNewsImageOrPdf, updateNewsInfo } from "../../utills/updateNews";
 import ErrorMsg from "../errorMsg/ErrorMsg";
@@ -162,7 +162,8 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
     isError: isPdfDeleteError,
     error: pdfDeleteError,
   } = useMutation({
-    mutationFn: (data) => deleteNewsFile(data),
+    mutationFn: (data) =>
+      deleteItem(`/news/deleteFile/${data.id}/${data.type}`),
     onSuccess: async () => {
       updateStatus(3, false, true);
 
@@ -182,7 +183,8 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
     isError: isImageDeleteError,
     error: imageDeleteError,
   } = useMutation({
-    mutationFn: (data) => deleteNewsFile(data),
+    mutationFn: (data) =>
+      deleteItem(`/news/deleteFile/${data.id}/${data.type}`),
     onSuccess: async () => {
       updateStatus(4, false, true);
 

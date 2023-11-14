@@ -48,23 +48,6 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
     setAdminDropdownOpen7(!isAdminDropdownOpen7);
   };
 
-  // const [menuVisible, setMenuVisible] = useState(false);
-
-  // const toggleMenu = () => {
-  //   setMenuVisible(!menuVisible);
-  // };
-
-  // New Side bar
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  // const toggleSidebar = () => {
-  //   setIsSidebarOpen(!isSidebarOpen);
-  // };
-
-  // const removeSidebar = () => {
-  //   setIsSidebarOpen(false);
-  // };
-
   return (
     <React.Fragment>
       {/* Large Device Sidebar */}
@@ -78,7 +61,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown}
             className={`adminNavbar-link ${
               isAdminDropdownOpen ? "active" : ""
-            } px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -150,7 +133,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown2}
             className={`adminNavbar-link ${
               isAdminDropdownOpen2 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -186,7 +169,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown7}
             className={`adminNavbar-link ${
               isAdminDropdownOpen7 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -219,7 +202,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown3}
             className={`adminNavbar-link ${
               isAdminDropdownOpen3 ? "active" : ""
-            } mt-1  px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1  px-4 py-2 flex justify-between  cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -261,7 +244,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown4}
             className={`adminNavbar-link ${
               isAdminDropdownOpen4 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2  justify-between flex cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -277,7 +260,10 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             <div className="dropdown-menu border p-2">
               <ul>
                 <li className=" mb-1 ml-4">
-                  <Link to="/school-result">স্কুল রেজাল্ট</Link>
+                  <Link to="/school-result">স্কুলের রেজাল্ট প্রকাশ</Link>
+                </li>
+                <li className=" mb-1 ml-4">
+                  <Link to="/check-school-result">স্কুল রেজাল্ট</Link>
                 </li>
               </ul>
             </div>
@@ -288,7 +274,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown5}
             className={`adminNavbar-link ${
               isAdminDropdownOpen5 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2  justify-between flex cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -315,7 +301,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown6}
             className={`adminNavbar-link ${
               isAdminDropdownOpen6 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2  justify-between flex cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -355,17 +341,6 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
 
       {/* Responsive Sidebar */}
       <div className="adminResponsiveSidebar block lg:hidden">
-        {/* <div className={`menu-bar ${isSidebarOpen ? "open" : ""}`}>
-          <div className="menu-icon" onClick={toggleSidebar}>
-            <div
-              className={`menu-icon ${menuVisible ? "cross" : ""}`}
-              onClick={toggleMenu}
-            >
-              {menuVisible ? <FiX /> : <FiMenu />}
-            </div>
-          </div>
-        </div> */}
-
         <div
           className={`sidebar bg-slate-300  ${
             isSidebarOpen ? "open" : ""
@@ -564,7 +539,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown4}
             className={`adminNavbar-link ${
               isAdminDropdownOpen4 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2 flex justify-between cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">
@@ -580,7 +555,10 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             <div className="dropdown-menu border p-2">
               <ul>
                 <li onClick={removeSidebar} className=" mb-1 ml-4">
-                  <Link to="/school-result">স্কুল রেজাল্ট</Link>
+                  <Link to="/school-result">স্কুলের রেজাল্ট প্রকাশ</Link>
+                </li>
+                <li onClick={removeSidebar} className=" mb-1 ml-4">
+                  <Link to="/check-school-result">স্কুল রেজাল্ট</Link>
                 </li>
               </ul>
             </div>
@@ -591,7 +569,7 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
             onClick={toggleAdminDropdown5}
             className={`adminNavbar-link ${
               isAdminDropdownOpen5 ? "active" : ""
-            } mt-1 px-4 py-2 flex justify-between flex cursor-pointer items-center`}
+            } mt-1 px-4 py-2  justify-between flex cursor-pointer items-center`}
           >
             <div className="flex items-center">
               <i className="pr-2">

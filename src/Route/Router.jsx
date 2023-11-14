@@ -26,7 +26,8 @@ import NoticeDetails from "../pages/noticeDetails/NoticeDetails";
 import Play from "../pages/play/Play";
 import PresidentMessage from "../pages/presidentMessage/PresidentMessage";
 import PrincipalMessage from "../pages/principalMessage/PrincipalMessage";
-import SchoolResult from "../pages/schoolResult/SchoolResult";
+import CheckResult from "../pages/schoolResult/checkResult/CheckResult";
+import UploadResult from "../pages/schoolResult/uploadResult/UploadResult";
 import ScoutGuide from "../pages/scoutGuide/ScoutGuide";
 import SeekingAdmission from "../pages/seekingAdmission/SeekingAdmission";
 import Syllabus from "../pages/syllabus/Syllabus";
@@ -68,7 +69,8 @@ export const reactRouter = createBrowserRouter(
         path="/list-of-selected-students-waiting-admission"
         element={<WaitingAdmission />}
       />
-      <Route path="/school-result" element={<SchoolResult />} />
+      <Route path="/school-result" element={<UploadResult />} />
+      <Route path="/check-school-result" element={<CheckResult />} />
       <Route path="/events" element={<Events />} />
       {/* Edit Next line */}
       <Route path="/detail-events" element={<DetailEvents />} />

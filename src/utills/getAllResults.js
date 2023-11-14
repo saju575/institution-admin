@@ -1,10 +1,11 @@
 import axios from "./axiosInstance";
 
 /* 
-    get news data
+    get results data
 */
-export const getAllNews = async (queryKey = {}) => {
-  const { page, limit, searchQuery, type, priority } = queryKey;
+export const getAllResults = async (queryKey = {}) => {
+  const { page, limit, searchQuery, title, classTitle, examType, group, year } =
+    queryKey;
 
   // Create an object to hold the query parameters that are present
   const queryParams = {};
@@ -19,15 +20,24 @@ export const getAllNews = async (queryKey = {}) => {
   if (limit) {
     queryParams.limit = limit;
   }
-  if (type) {
-    queryParams.type = type;
+  if (title) {
+    queryParams.title = title;
   }
-  if (priority) {
-    queryParams.priority = priority;
+  if (examType) {
+    queryParams.examType = examType;
+  }
+  if (group) {
+    queryParams.group = group;
+  }
+  if (year) {
+    queryParams.year = year;
+  }
+  if (classTitle) {
+    queryParams.classTitle = classTitle;
   }
 
   const queryString = new URLSearchParams(queryParams).toString();
-  const url = `/news?${queryString}`;
+  const url = `/students-result/all?${queryString}`;
   try {
     const response = await axios.get(url);
     return response.data;

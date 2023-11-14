@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 import UpdateModal from "../../components/allNotice/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
-import { deleteNews } from "../../utills/deleteNews";
+import { deleteItem } from "../../utills/deleteItem";
 
 const WaitingAdmissionCard = ({ notice, refetch }) => {
   // Modal popup state For confirmation
@@ -47,7 +47,7 @@ const WaitingAdmissionCard = ({ notice, refetch }) => {
     delete mutation
   */
   const { mutateAsync: deleteMutate, isLoading } = useMutation({
-    mutationFn: (id) => deleteNews(id),
+    mutationFn: (id) => deleteItem(`/news/delete/${id}`),
     onSuccess: async () => {
       // refetch();
       queryClient.invalidateQueries();

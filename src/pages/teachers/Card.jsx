@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import UpdateModal from "../../components/administrator/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
-import { deleteAdministration } from "../../utills/deleteAdministration";
+import { deleteItem } from "../../utills/deleteItem";
 
 const Card = ({ teacher, refetch }) => {
   // Modal popup For add Events
@@ -35,7 +35,7 @@ const Card = ({ teacher, refetch }) => {
         delete mutation
       */
   const { mutateAsync: deleteMutate, isLoading } = useMutation({
-    mutationFn: (id) => deleteAdministration(id),
+    mutationFn: (id) => deleteItem(`/administrator/${id}`),
     onSuccess: async () => {
       refetch();
 
