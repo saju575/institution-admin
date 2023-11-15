@@ -144,8 +144,6 @@ const WaitingAdmission = () => {
 
       {/* Modal Popup */}
 
-      {isCreateModalOpen && <div className="overlay"></div>}
-
       {isCreateModalOpen && (
         <CreateModal
           handleModalClose={handleModalClose}

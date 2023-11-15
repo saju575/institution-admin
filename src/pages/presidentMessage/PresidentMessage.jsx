@@ -1,49 +1,74 @@
 import React, { useState } from "react";
-import { RxCross2 } from "react-icons/rx";
+import { useQuery } from "react-query";
+import ErrorMsg from "../../components/errorMsg/ErrorMsg";
+import CreateModal from "../../components/layoutModal/CreateModal";
+import UpdateModal from "../../components/layoutModal/UpdateModal";
+import Spinner from "../../components/spinner/Spinner";
+import { getLayoutData } from "../../utills/getLayoutData";
 
 const PresidentMessage = () => {
-  const managerData = [
-    {
-      name: "মোঃ আব্দুর রহমান",
-      designation: "প্রতিষ্ঠান সভাপতি",
-      image: "/assets/profile.jpg",
-      phone: "04161-354156",
-    },
-  ];
-
-  const handleUpdate = (index) => {
-    console.log("Update clicked for index:", index);
-  };
-
-  const handleRemove = (index) => {
-    console.log("Remove clicked for index:", index);
-  };
-
   // Modal popup For add Events
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
+  // state For Update Modal
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+
+  const handleCreateModalOpen = () => {
+    setCreateModalOpen(() => true);
   };
 
-  const handleModalClose = () => {
-    setModalOpen(false);
+  const handleCreateModalClose = () => {
+    setCreateModalOpen(() => false);
   };
 
-  // Selected Image from Desktop
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setSelectedImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  /* 
+    update modal handler
+  */
+  const handleUpdateModalOpen = () => {
+    setUpdateModalOpen(true);
   };
+
+  const handleUpdateModalClose = () => {
+    setUpdateModalOpen(false);
+  };
+
+  // fetech data
+  const { data, isLoading, error, isError } = useQuery({
+    staleTime: Infinity,
+    queryKey: ["president_message"],
+    queryFn: () => getLayoutData(`/layout?type=president_message`),
+  });
+
+  //data render
+
+  let layoutData;
+  if (isLoading) {
+    layoutData = (
+      <div className="flex justify-center items-center py-4">
+        <Spinner />
+      </div>
+    );
+  } else if (!isLoading && isError) {
+    layoutData = (
+      <div>
+        <ErrorMsg msg={error.message} />
+      </div>
+    );
+  } else if (!isLoading && !isError && !data?.payload) {
+    layoutData = (
+      <div>
+        <ErrorMsg msg={"No data found"} />
+      </div>
+    );
+  } else if (!isLoading && !isError && data?.payload) {
+    layoutData = (
+      <div
+        dangerouslySetInnerHTML={{
+          __html: data?.payload?.president_message?.desc || "",
+        }}
+      />
+    );
+  }
 
   return (
     <React.Fragment>
@@ -53,141 +78,52 @@ const PresidentMessage = () => {
             প্রতিষ্ঠান সভাপতির বাণী
           </h3>
         </div>
-        <div className="teachers-card grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3">
-          {managerData.map((teacher, index) => (
-            <div
-              key={index}
-              className="teachers-card p-4 bg-[#FFFFFF] shadow my-3 flex flex-col items-center"
-            >
-              <div className="teachers-card-img my-4">
-                <picture>
-                  <img src={teacher.image} alt="profile" />
-                </picture>
-              </div>
-              <div className="teachers-card-identity">
-                <h4 className="font-medium text-md">{teacher.name}</h4>
-                <h5>{teacher.designation}</h5>
-                <h5>মোবাইলঃ {teacher.phone}</h5>
-                <h6>দানারহাট আনছারিয়া ফাজিল মাদ্রাসা, ঠাকুরগাঁও</h6>
-                <div className="flex justify-between mt-3">
-                  <button
-                    className="bg-[#244c63ad] text-white px-4 py-1"
-                    onClick={() => {
-                      handleUpdate(index);
-                      handleModalOpen();
-                    }}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="bg-[#CE5A67] text-white px-4 py-1"
-                    onClick={() => handleRemove(index)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Add More Content Button */}
-        <div className="mb-4 cursor-pointer text-end mt-4 text-white">
-          <a
-            href="##"
-            onClick={handleModalOpen}
-            className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
-          >
-            নতুন সংযোগ{" "}
-          </a>
-        </div>
+        {/* add and update btn */}
+        {data && (
+          <div className="flex justify-end gap-4 px-2 pt-2">
+            {!data?.payload ? (
+              <span
+                onClick={handleCreateModalOpen}
+                className="bg-[#244c63ad] px-4 text-white cursor-pointer  py-2 border"
+              >
+                নতুন সংযোগ
+              </span>
+            ) : (
+              <span
+                onClick={handleUpdateModalOpen}
+                className="bg-[#244c63ad] px-4 text-white cursor-pointer  py-2 border"
+              >
+                আপডেট করুন
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* data */}
+        <div className="py-4 px-2">{layoutData}</div>
       </div>
 
-      {/* Modal Popup */}
-      {isModalOpen && (
-        <div className="modal-container">
-          <div className="modal shadow absolute top-10  bg-[#FFFFFF]  border p-14 max-w-96 ">
-            <div className="modal-content">
-              <span
-                className="close cursor-pointer border bg-[#111] px-4 text-end py-1 text-white absolute right-2 top-2"
-                onClick={handleModalClose}
-              >
-                <a href="##">
-                  <i className=" py-8 text-2xl ">
-                    <RxCross2 />
-                  </i>
-                </a>
-              </span>
-
-              {/* form content goes here */}
-              <div className="mt-10">
-                <form>
-                  <div className="form-group flex flex-wrap my-2 items-center ">
-                    <label htmlFor="title" className="pr-4 w-32">
-                      সভাপতির নামঃ
-                    </label>
-                    <input
-                      className="outline-none px-4 py-2 bg-[#F3F3F3]"
-                      type="text"
-                      id="title"
-                      name="title"
-                      placeholder="সভাপতির নাম"
-                    />
-                  </div>
-
-                  <div className="form-group flex flex-wrap my-2 items-center ">
-                    <label htmlFor="title" className="pr-4 w-32">
-                      পদঃ
-                    </label>
-                    <input
-                      className="outline-none  px-4 py-2 bg-[#F3F3F3]"
-                      type="text"
-                      id="title"
-                      name="title"
-                      placeholder="পদ"
-                    />
-                  </div>
-
-                  <div className="form-group flex flex-wrap my-2 items-center">
-                    <label htmlFor="date" className="pr-4 w-32">
-                      মোবাইল নম্বরঃ
-                    </label>
-                    <input
-                      className="outline-none  px-4 py-2 bg-[#F3F3F3]"
-                      type="text"
-                      id="title"
-                      name="title"
-                      placeholder="মোবাইল নম্বর"
-                    />
-                  </div>
-
-                  <div className="form-group my-4">
-                    <label htmlFor="image" className="pr-4 w-32">
-                      সভাপতির ছবিঃ
-                    </label>
-                    <input
-                      src={selectedImage}
-                      type="file"
-                      id="image"
-                      name="image"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                    />
-                  </div>
-
-                  <div className="text-center mt-14 text-black">
-                    <button type="submit" className="bg-[#c5dfe77a] px-12 py-4">
-                      সংযোগ করুন
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Modal Popup For add new member*/}
+      {isCreateModalOpen && (
+        <CreateModal
+          handleModalClose={handleCreateModalClose}
+          type={"president_message"}
+          keyword={"president_message"}
+          heading={{ title: "নতুন সংযোগ করুন" }}
+          link={`/layout/create`}
+        />
       )}
 
-      {isModalOpen && <div className="overlay"></div>}
+      {isUpdateModalOpen && (
+        <UpdateModal
+          id={data?.payload?._id}
+          handleModalClose={handleUpdateModalClose}
+          type={"president_message"}
+          keyword={"president_message"}
+          heading={{ title: "আপডেট করুন" }}
+        />
+      )}
     </React.Fragment>
   );
 };

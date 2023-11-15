@@ -109,8 +109,6 @@ const Workers = () => {
         )}
       </div>
 
-      {isModalOpen && <div className="overlay"></div>}
-
       {/* Modal Popup For add new member*/}
       {isModalOpen && (
         <CreateModal

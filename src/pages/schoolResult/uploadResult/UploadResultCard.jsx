@@ -91,11 +91,6 @@ const UploadResultCard = ({ result, refetch }) => {
         </td>
       </tr>
 
-      {/* overley  */}
-      {(isConfirmModalOpen || isUpdateModalOpen) && (
-        <div className="overlay"></div>
-      )}
-
       {/* update modal popup */}
       {isUpdateModalOpen && (
         <UpdateModal

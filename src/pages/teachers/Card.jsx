@@ -51,7 +51,6 @@ const Card = ({ teacher, refetch }) => {
   };
   return (
     <>
-      {(isModalOpen || isConfirmModalOpen) && <div className="overlay"></div>}
       <div className="teachers-card p-4 bg-[#FFFFFF] shadow my-3 flex flex-col items-center">
         <div className="teachers-card-img my-4">
           {teacher?.image?.url ? (

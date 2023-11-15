@@ -85,9 +85,6 @@ const Card = ({ worker, refetch }) => {
         </div>
       </div>
 
-      {/* overlay */}
-      {(isModalOpen || isConfirmModalOpen) && <div className="overlay"></div>}
-
       {/* Update Modal Popup */}
       {isModalOpen && (
         <UpdateModal handleModalClose={handleModalClose} id={worker._id} />

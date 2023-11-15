@@ -81,11 +81,6 @@ const NewsCard = ({ item, refetch }) => {
         </div>
       </li>
 
-      {/* overley  */}
-      {(isConfirmModalOpen || isUpdateModalOpen) && (
-        <div className="overlay"></div>
-      )}
-
       {/* update modal popup */}
       {isUpdateModalOpen && (
         <UpdateModal

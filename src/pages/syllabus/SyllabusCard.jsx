@@ -133,11 +133,6 @@ const SyllabusCard = ({ syllabus, refetch }) => {
         </td>
       </tr>
 
-      {/* overley  */}
-      {(isConfirmModalOpen || isUpdateModalOpen) && (
-        <div className="overlay"></div>
-      )}
-
       {/* update modal popup */}
       {isUpdateModalOpen && (
         <UpdateModal

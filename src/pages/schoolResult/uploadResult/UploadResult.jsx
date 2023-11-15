@@ -140,8 +140,6 @@ const UploadResult = () => {
 
       {/* Modal Popup */}
 
-      {isCreateModalOpen && <div className="overlay"></div>}
-
       {/* Upload Modal popup*/}
       {isCreateModalOpen && (
         <UploadModal

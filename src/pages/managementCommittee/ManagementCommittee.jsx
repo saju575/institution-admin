@@ -6,7 +6,6 @@ import ErrorMsg from "../../components/errorMsg/ErrorMsg";
 import Spinner from "../../components/spinner/Spinner";
 import { getAdministrators } from "../../utills/getAdministrators";
 import Card from "./Card";
-import "./ManagementCommittee.css";
 
 const ManagementCommittee = () => {
   // Modal popup For add new members
@@ -61,7 +60,6 @@ const ManagementCommittee = () => {
 
   return (
     <div>
-      {isModalOpen && <div className="overlay"></div>}
       <div id="teachers">
         <div className="teachers-title">
           <h3 className="bg-[#79929C] text-white font-medium text-md p-4">

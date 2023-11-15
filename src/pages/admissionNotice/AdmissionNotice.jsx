@@ -138,9 +138,6 @@ const AdmissionNotice = () => {
 
       {/* Modal Popup */}
 
-      {/* Add More Content Button */}
-      {isCreateModalOpen && <div className="overlay"></div>}
-
       {isCreateModalOpen && (
         <CreateModal
           handleModalClose={handleModalClose}

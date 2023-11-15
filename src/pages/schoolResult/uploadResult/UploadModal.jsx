@@ -332,7 +332,7 @@ const UploadModal = ({
                   }`}
                   disabled={isLoading}
                 >
-                  {!isLoading ? "সংযোগ করুন" : "Loadding..."}
+                  {!isLoading ? "সংযোগ করুন" : "Loading..."}
                 </button>
               </div>
             </form>

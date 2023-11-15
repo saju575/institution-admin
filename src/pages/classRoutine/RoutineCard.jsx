@@ -74,8 +74,8 @@ const RoutineCard = ({ routine, refetch }) => {
             {moment(routine.updatedAt).format("DD - MM - YYYY")}
           </p>
         </td>
-        <td className="p-2">
-          {routine.title.split(/\s+/).slice(0, 13).join(" ") + "..."}
+        <td className="p-2" title={routine.title}>
+          {routine.title.split(/\s+/).slice(0, 5).join(" ") + "..."}
         </td>
         <td className="p-2">
           <Link to={`/notice/${routine._id}`} className="flex items-center">
@@ -133,11 +133,6 @@ const RoutineCard = ({ routine, refetch }) => {
           </button>
         </td>
       </tr>
-
-      {/* overley  */}
-      {(isConfirmModalOpen || isUpdateModalOpen) && (
-        <div className="overlay"></div>
-      )}
 
       {/* update modal popup */}
       {isUpdateModalOpen && (

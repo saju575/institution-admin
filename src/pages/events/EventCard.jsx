@@ -104,11 +104,6 @@ const EventCard = ({ event, refetch }) => {
         </div>
       </div>
 
-      {/* overley  */}
-      {(isConfirmModalOpen || isUpdateModalOpen) && (
-        <div className="overlay"></div>
-      )}
-
       {/* update modal popup */}
       {isUpdateModalOpen && (
         <UpdateModal

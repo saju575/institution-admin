@@ -6,7 +6,6 @@ import ErrorMsg from "../../components/errorMsg/ErrorMsg";
 import Spinner from "../../components/spinner/Spinner";
 import { getAllNews } from "../../utills/getAllNews";
 import EventCard from "./EventCard";
-import "./Events.css";
 
 const Events = () => {
   //modal state for events
@@ -111,8 +110,6 @@ const Events = () => {
       )}
 
       {/* Modal Popup */}
-
-      {isCreateModalOpen && <div className="overlay"></div>}
 
       {isCreateModalOpen && (
         <CreateModal

@@ -1,17 +1,78 @@
 import React, { useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { useQuery } from "react-query";
+import ErrorMsg from "../../components/errorMsg/ErrorMsg";
+import CreateModal from "../../components/layoutModal/CreateModal";
+import UpdateModal from "../../components/layoutModal/UpdateModal";
+import Spinner from "../../components/spinner/Spinner";
+import { getLayoutData } from "../../utills/getLayoutData";
 
 const AimAndObjective = () => {
-  const [text, setText] = useState("");
+  // Modal popup For add Events
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
-  const handleChange = (value) => {
-    setText(value);
+  // state For Update Modal
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+
+  const handleCreateModalOpen = () => {
+    setCreateModalOpen(() => true);
   };
 
-  const AimAndObjective = [
-    "আমাদের শিক্ষা প্রতিষ্ঠানের লক্ষ্য হলো শিক্ষার মাধ্যমে শিক্ষার্থীদের জ্ঞান এবং আদর্শ প্রশাসন তৈরি করা, যাতে তারা সমৃদ্ধ, সৃজনশীল, সম্পর্কশীল এবং সমাজে দায়িত্বশীল নাগরিক হতে পারে। আমাদের স্কুল একটি গতিশীল এবং ব্যাপক শিক্ষা প্রতিষ্ঠান, যা একটি আদর্শ উপস্থিতিতে অবস্থিত আছে একটি আদর্শ উপনগরে। এটি একটি শান্তিপূর্ণ পরিবেশ প্রদান করে, যেখানে বিভিন্ন সংস্কৃতির ছাত্র-ছাত্রী শিক্ষার পথে অগ্রগতি করতে পারে। আমাদের শিক্ষক দল প্রতিশ্রুতিশীল এবং উচ্চ যোগ্যতাসম্পন্ন, যারা বিজ্ঞান থেকে শিল্প প্রস্থান পর্যন্ত বিভিন্ন শাখা সম্পর্কে সম্পূর্ণ জ্ঞান দেওয়ার চেষ্টা করে। আমরা আমাদের ছাত্র-ছাত্রীদেরকে নৈতিক মৌল্য, সম্মান, সমরাস এবং সঠিক মানবিক মূল্যের প্রতি প্রশাসন করতে শেখাই। আমরা শিক্ষা প্রদানের মাধ্যমে তাদের জ্ঞান, দক্ষতা এবং সম্পর্কবিপ্লবে প্রস্তুত করে তোলার চেষ্টা করি, যা তাদেরকে প্রযুক্তিগত ও নৈতিক দিকে সমৃদ্ধ ব্যক্তিত্ব হিসেবে পরিণত করতে সাহায্য করে।",
-  ];
+  const handleCreateModalClose = () => {
+    setCreateModalOpen(() => false);
+  };
+
+  /* 
+    update modal handler
+  */
+  const handleUpdateModalOpen = () => {
+    setUpdateModalOpen(true);
+  };
+
+  const handleUpdateModalClose = () => {
+    setUpdateModalOpen(false);
+  };
+
+  const {
+    data: objective,
+    isLoading: isObjectiveLoading,
+    error: objectiveError,
+    isError: isObjectiveError,
+  } = useQuery({
+    staleTime: Infinity,
+    queryKey: ["institution_objective"],
+    queryFn: () => getLayoutData(`/layout?type=institution_objective`),
+  });
+
+  // what to render
+  let layoutData;
+
+  if (isObjectiveLoading) {
+    layoutData = (
+      <div className="flex justify-center items-center py-4">
+        <Spinner />
+      </div>
+    );
+  } else if (!isObjectiveLoading && isObjectiveError) {
+    layoutData = (
+      <div>
+        <ErrorMsg msg={objectiveError.message} />
+      </div>
+    );
+  } else if (!isObjectiveLoading && !isObjectiveError && !objective?.payload) {
+    layoutData = (
+      <div>
+        <ErrorMsg msg={"No data found"} />
+      </div>
+    );
+  } else if (!isObjectiveLoading && !isObjectiveError && objective?.payload) {
+    layoutData = (
+      <div
+        dangerouslySetInnerHTML={{
+          __html: objective?.payload?.institution_objective?.desc || "",
+        }}
+      />
+    );
+  }
 
   return (
     <React.Fragment>
@@ -20,37 +81,52 @@ const AimAndObjective = () => {
           <h3 className="bg-[#79929C] text-white font-medium text-md  py-4 pl-4">
             প্রতিষ্ঠানের লক্ষ্য ও উদ্দেশ্য
           </h3>
-          {AimAndObjective.map((text, index) => (
-            <li className="py-2 list-none mx-2" key={index}>
-              <div className="currentNewsList my-2 flex justify-between flex-wrap">
-                <p>{text}</p>
-                <button className="bg-[#CE5A67] text-white px-4 mt-2 py-1">
-                  মুছুন
-                </button>
-              </div>
-            </li>
-          ))}
 
-          <div className="my-4 flex flex-col mt-8">
-            <h4 className="font-semibold text-lg underline">নতুন সংযোগ করুন</h4>
-
-            {/* Text Area to add news */}
-            <div className=" my-10 ">
-              <ReactQuill
-                className="h-44"
-                value={text}
-                onChange={handleChange}
-              />
+          {/* add and update btn */}
+          {objective && (
+            <div className="flex justify-end gap-4 px-2 pt-2">
+              {!objective?.payload ? (
+                <span
+                  onClick={handleCreateModalOpen}
+                  className="bg-[#244c63ad] px-4 text-white cursor-pointer  py-2 border"
+                >
+                  নতুন সংযোগ
+                </span>
+              ) : (
+                <span
+                  onClick={handleUpdateModalOpen}
+                  className="bg-[#244c63ad] px-4 text-white cursor-pointer  py-2 border"
+                >
+                  আপডেট করুন
+                </span>
+              )}
             </div>
+          )}
 
-            <div className="mt-4 text-black">
-              <button type="submit" className="bg-[#c5dfe77a] px-6 py-2 mb-2">
-                আপডেট করুন
-              </button>
-            </div>
-          </div>
+          {/* data */}
+          <div className="py-4 px-2">{layoutData}</div>
         </div>
       </div>
+      {/* Modal Popup For add new member*/}
+      {isCreateModalOpen && (
+        <CreateModal
+          handleModalClose={handleCreateModalClose}
+          type={"institution_objective"}
+          keyword={"institution_objective"}
+          heading={{ title: "নতুন সংযোগ করুন" }}
+          link={`/layout/create`}
+        />
+      )}
+
+      {isUpdateModalOpen && (
+        <UpdateModal
+          id={objective?.payload?._id}
+          handleModalClose={handleUpdateModalClose}
+          type={"institution_objective"}
+          keyword={"institution_objective"}
+          heading={{ title: "আপডেট করুন" }}
+        />
+      )}
     </React.Fragment>
   );
 };

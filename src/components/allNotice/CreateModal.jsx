@@ -187,7 +187,8 @@ const CreateModal = ({
               <div className="flex flex-col gap-2">
                 <label htmlFor="desc">{heading.desc}(ঐচ্ছিক):</label>
                 <ReactQuill
-                  className="h-44 mb-9"
+                  className="h-64 mb-9"
+                  name="desc"
                   id="desc"
                   value={formik.values.desc}
                   onChange={(value) => formik.setFieldValue("desc", value)}
@@ -211,7 +212,7 @@ const CreateModal = ({
                   }`}
                   disabled={isLoading}
                 >
-                  {!isLoading ? "সংযোগ করুন" : "Loadding..."}
+                  {!isLoading ? "সংযোগ করুন" : "Loading..."}
                 </button>
               </div>
             </form>

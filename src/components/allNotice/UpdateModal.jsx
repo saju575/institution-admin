@@ -343,8 +343,9 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
               <div className="flex flex-col gap-2">
                 <label htmlFor="desc">{heading.desc}(ঐচ্ছিক):</label>
                 <ReactQuill
-                  className="h-44 mb-9"
+                  className="h-64 mb-9"
                   id="desc"
+                  name="desc"
                   value={infoFormik.values.desc}
                   onChange={(value) => {
                     infoFormik.setFieldValue("desc", value);
@@ -381,7 +382,7 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
                     }`}
                     disabled={isInfoLoading}
                   >
-                    {!isInfoLoading ? "আপডেট করুন" : "Loadding..."}
+                    {!isInfoLoading ? "আপডেট করুন" : "Loading..."}
                   </button>
                 </div>
               </div>
@@ -452,7 +453,7 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
                   }`}
                   disabled={isPdfLoading}
                 >
-                  {!isPdfLoading ? "আপডেট করুন" : "Loadding..."}
+                  {!isPdfLoading ? "আপডেট করুন" : "Loading..."}
                 </button>
 
                 {isNewsSuccess && news?.payload?.pdf?.url && (
@@ -465,7 +466,7 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
                     disabled={isPdfDeleteLoading}
                     onClick={deletePdfHandler}
                   >
-                    {!isPdfDeleteLoading ? "PDF মুছুন" : "Loadding..."}
+                    {!isPdfDeleteLoading ? "PDF মুছুন" : "Loading..."}
                   </span>
                 )}
               </div>
@@ -537,7 +538,7 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
                   }`}
                   disabled={isImgLoading}
                 >
-                  {!isImgLoading ? "আপডেট করুন" : "Loadding..."}
+                  {!isImgLoading ? "আপডেট করুন" : "Loading..."}
                 </button>
 
                 {isNewsSuccess && news?.payload?.image?.url && (
@@ -550,7 +551,7 @@ const UpdateModal = ({ handleModalClose, id, heading }) => {
                     disabled={isImageDeleteLoading}
                     onClick={deleteImageHandler}
                   >
-                    {!isImageDeleteLoading ? "IMAGE মুছুন" : "Loadding..."}
+                    {!isImageDeleteLoading ? "IMAGE মুছুন" : "Loading..."}
                   </span>
                 )}
               </div>

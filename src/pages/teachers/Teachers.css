@@ -6,27 +6,5 @@
 #teachers .teachers-AllTeachersBtn a {
   padding: 10px 30px;
   text-decoration: underline;
-  background: #79929C;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(20, 18, 18, 0.822);
-  z-index: 1000;
-}
-
-.modal-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1001;
+  background: #79929c;
 }

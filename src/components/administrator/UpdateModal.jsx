@@ -9,7 +9,6 @@ import {
   updateAdminstratorInfo,
 } from "../../utills/updateAdministrator";
 import ErrorMsg from "../errorMsg/ErrorMsg";
-import styles from "./modal.module.css";
 
 /* 
 form validation schema
@@ -102,8 +101,8 @@ const UpdateModal = ({ handleModalClose, id }) => {
   };
 
   return (
-    <div className={`${styles.modal_container}`}>
-      <div className="modal shadow absolute top-10  bg-[#FFFFFF]  border p-14 max-w-96 ">
+    <div className="modal-container">
+      <div className="modal shadow absolute top-10  bg-[#FFFFFF] p-6  border sm:p-14 w-[350px] sm:w-[600px]">
         <div className="modal-content">
           <span
             className="close cursor-pointer border bg-[#111] px-4 text-end py-1 text-white absolute right-2 top-2"
@@ -224,7 +223,7 @@ const UpdateModal = ({ handleModalClose, id }) => {
                     }`}
                     disabled={isLoading}
                   >
-                    {!isLoading ? "আপডেট তথ্য" : "Loadding..."}
+                    {!isLoading ? "আপডেট তথ্য" : "Loading..."}
                   </button>
                 </div>
               </form>
