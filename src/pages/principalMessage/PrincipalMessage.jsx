@@ -63,6 +63,7 @@ const PrincipalMessage = () => {
   } else if (!isLoading && !isError && data?.payload) {
     layoutData = (
       <div
+        className="no-tailwind"
         dangerouslySetInnerHTML={{
           __html: data?.payload?.principal_message?.desc || "",
         }}

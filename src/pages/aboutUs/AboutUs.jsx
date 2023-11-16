@@ -67,6 +67,7 @@ const AboutUs = () => {
   } else if (!isAboutUsLoading && !isAboutUsError && aboutUs?.payload) {
     layoutData = (
       <div
+        className="no-tailwind"
         dangerouslySetInnerHTML={{
           __html: aboutUs?.payload?.about_institution?.desc || "",
         }}

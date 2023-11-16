@@ -67,6 +67,7 @@ const AimAndObjective = () => {
   } else if (!isObjectiveLoading && !isObjectiveError && objective?.payload) {
     layoutData = (
       <div
+        className="no-tailwind"
         dangerouslySetInnerHTML={{
           __html: objective?.payload?.institution_objective?.desc || "",
         }}

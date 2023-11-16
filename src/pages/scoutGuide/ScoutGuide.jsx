@@ -61,6 +61,7 @@ const ScoutGuide = () => {
   } else if (!isLoading && !isError && data?.payload) {
     layoutData = (
       <div
+        className="no-tailwind"
         dangerouslySetInnerHTML={{
           __html: data?.payload?.boys_and_girls_scout_guide?.desc || "",
         }}
