@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import UpdateModal from "../../components/allNotice/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
 import { deleteNews } from "../../utills/deleteNews";
+import { downloadFileFromUrl } from "../../utills/downloadFileFromURL";
 
 const RoutineCard = ({ routine, refetch }) => {
   //  popup state For Confirmation Modal
@@ -88,29 +89,28 @@ const RoutineCard = ({ routine, refetch }) => {
         </td>
         <td className="p-2">
           {routine?.pdf?.url && (
-            <a
-              href={`#download-link-${routine._id}`}
-              // download={"routine.pdf"}
+            <button
+              onClick={() => downloadFileFromUrl(routine.pdf.url)}
               className="py-2 flex items-center"
             >
               <i className="pr-1">
                 <PiDownloadSimpleBold />
               </i>
               Download
-            </a>
+            </button>
           )}
         </td>
         <td className="p-2">
           {routine?.image?.url && (
-            <a
-              href={`#download-link-${routine._id}`}
+            <button
+              onClick={() => downloadFileFromUrl(routine.image.url)}
               className="py-2 flex items-center"
             >
               <i className="pr-1">
                 <PiDownloadSimpleBold />
               </i>
               Download
-            </a>
+            </button>
           )}
         </td>
 

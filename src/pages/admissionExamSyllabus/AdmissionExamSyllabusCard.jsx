@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import UpdateModal from "../../components/allNotice/UpdateModal";
 import ConfirmationModal from "../../components/confirmModal/ConfirmationModal";
 import { deleteNews } from "../../utills/deleteNews";
+import { downloadFileFromUrl } from "../../utills/downloadFileFromURL";
 
 const AdmissionExamSyllabusCard = ({ notice, refetch }) => {
   // Modal popup state For confirmation
@@ -85,28 +86,28 @@ const AdmissionExamSyllabusCard = ({ notice, refetch }) => {
         </td>
         <td className="p-2">
           {notice?.pdf?.url && (
-            <a
-              href={`#download-link-${notice._id}`}
+            <button
+              onClick={() => downloadFileFromUrl(notice.pdf.url)}
               className="py-2 flex items-center"
             >
               <i className="pr-1">
                 <PiDownloadSimpleBold />
               </i>
               Download
-            </a>
+            </button>
           )}
         </td>
         <td className="p-2">
           {notice?.image?.url && (
-            <a
-              href={`#download-link-${notice._id}`}
+            <button
+              onClick={() => downloadFileFromUrl(notice.image.url)}
               className="py-2 flex items-center"
             >
               <i className="pr-1">
                 <PiDownloadSimpleBold />
               </i>
               Download
-            </a>
+            </button>
           )}
         </td>
 

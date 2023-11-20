@@ -8,7 +8,7 @@ const MarksSheet = ({ result, handleResult }) => {
       <div className="container mx-auto px-4 pb-4">
         <div
           id="logoArea"
-          class={`py-5 px-4 sm:block md:flex lg:flex items-center justify-between bg-[#FFFFFF] ${styles.logoArea}`}
+          className={`py-5 px-4 sm:block md:flex lg:flex items-center justify-between bg-[#FFFFFF] ${styles.logoArea}`}
         >
           <div className="flex items-center">
             <picture className="pr-5 max-[767px]:pr-0">
@@ -41,14 +41,14 @@ const MarksSheet = ({ result, handleResult }) => {
         </div>
 
         {/* <!-- Title --> */}
-        <div class={`${styles.marksheetTitle}`}>
+        <div className={`${styles.marksheetTitle}`}>
           <h1 className="my-8 text-xl p-4 text-center font-semibold">
             মার্কশীট
           </h1>
         </div>
 
         {/* <!-- Students Details --> */}
-        <div class={`${styles.studentDetailsTable}`}>
+        <div className={`${styles.studentDetailsTable}`}>
           {/* <!-- title --> */}
           <h4 className="underline font-semibold text-lg my-2">
             স্টুডেন্ট ইনফোরমেশন
@@ -100,7 +100,7 @@ const MarksSheet = ({ result, handleResult }) => {
         </div>
 
         {/* <!-- Marksheet Part --> */}
-        <div class={`${styles.marksheetMainPart} mt-10`}>
+        <div className={`${styles.marksheetMainPart} mt-10`}>
           <h4 className="underline font-semibold text-lg my-2">মার্কশীট</h4>
           <table className="w-full bg-white">
             {/* <!-- title --> */}
