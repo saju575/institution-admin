@@ -15,6 +15,7 @@ form validation schema
 */
 const validationSchema = Yup.object({
   name: Yup.string().required("নাম অবশ্যই পূরণ করতে হবে"),
+  institution: Yup.string().required("অবশ্যই পূরণ করতে হবে"),
   position: Yup.string().required("পদ অবশ্যই পূরণ করতে হবে"),
   phone: Yup.string()
     .matches(/^[0-9]{11}$/, "মোবাইল নম্বর সঠিক নয়")
@@ -68,6 +69,7 @@ const UpdateModal = ({ handleModalClose, id }) => {
     enableReinitialize: true,
     initialValues: {
       name: data?.payload?.name || "",
+      institution: data?.payload?.institution || "",
       position: data?.payload?.position || "",
       phone: data?.payload?.phone || "",
     },
@@ -113,122 +115,140 @@ const UpdateModal = ({ handleModalClose, id }) => {
             </i>
           </span>
 
-          {/* Image content goes here */}
-          {
-            <div className="mt-10">
-              <div className="flex flex-col justify-center items-center mb-6">
-                <div className="relative  border-2 border-dashed border-slate-300 rounded-lg  w-48 h-48">
-                  <input
-                    type="file"
-                    name="images"
-                    id="images"
-                    accept="image/*" // accept only the image
-                    className="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer"
-                    title="Try to upload photos..."
-                    onChange={handleImageChange}
-                  />
-                  <div className="h-full w-full   gap-y-1">
-                    {data?.payload?.image?.url ? (
-                      <img
-                        alt="placeholder"
-                        src={data?.payload?.image?.url}
-                        className="object-cover w-48 h-48"
-                      />
-                    ) : (
-                      <img
-                        alt="placeholder"
-                        src="/assets/profile.jpg"
-                        className="object-cover w-48 h-48"
-                      />
-                    )}
-                  </div>
+          <div className="mt-10">
+            {/* Image content goes here */}
+            <div className="flex flex-col justify-center items-center mb-6">
+              <div className="relative  border-2 border-dashed border-slate-300 rounded-lg  w-48 h-48">
+                <input
+                  type="file"
+                  name="images"
+                  id="images"
+                  accept="image/*" // accept only the image
+                  className="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer"
+                  title="Try to upload photos..."
+                  onChange={handleImageChange}
+                />
+                <div className="h-full w-full   gap-y-1">
+                  {data?.payload?.image?.url ? (
+                    <img
+                      alt="placeholder"
+                      src={data?.payload?.image?.url}
+                      className="object-cover w-48 h-48"
+                    />
+                  ) : (
+                    <img
+                      alt="placeholder"
+                      src="/assets/profile.jpg"
+                      className="object-cover w-48 h-48"
+                    />
+                  )}
                 </div>
               </div>
-
-              {/* form content goes here */}
-              <form onSubmit={formik.handleSubmit}>
-                <div className="form-group flex flex-wrap my-2 items-center ">
-                  <label htmlFor="title" className="pr-4 w-32">
-                    নামঃ
-                  </label>
-                  <input
-                    className="outline-none px-4 py-2 bg-[#F3F3F3]"
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="নাম"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={values.name}
-                  />
-                </div>
-
-                {errors.name && formik.touched && (
-                  <h3 className="text-red-500">{errors.name}</h3>
-                )}
-
-                <div className="form-group flex flex-wrap my-2 items-center ">
-                  <label htmlFor="title" className="pr-4 w-32">
-                    পদঃ
-                  </label>
-                  <input
-                    className="outline-none  px-4 py-2 bg-[#F3F3F3]"
-                    type="text"
-                    id="position"
-                    name="position"
-                    placeholder="পদ"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={values.position}
-                  />
-                </div>
-
-                {errors.position && touched.position && (
-                  <div className="text-red-500">{errors.position}</div>
-                )}
-
-                <div className="form-group flex flex-wrap my-2 items-center">
-                  <label htmlFor="date" className="pr-4 w-32">
-                    মোবাইল নম্বরঃ
-                  </label>
-                  <input
-                    className="outline-none  px-4 py-2 bg-[#F3F3F3]"
-                    type="text"
-                    id="phone"
-                    name="phone"
-                    placeholder="মোবাইল নম্বর(Optional)"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={values.phone}
-                  />
-                </div>
-
-                {errors.phone && touched.phone && (
-                  <div className="text-red-500">{errors.phone}</div>
-                )}
-
-                {/* Global error section */}
-                {isError && (
-                  <div className="mt-3">
-                    <ErrorMsg msg={error.message} />
-                  </div>
-                )}
-
-                {/* Button section */}
-                <div className="text-center mt-14 text-black">
-                  <button
-                    type="submit"
-                    className={`bg-[#c5dfe77a] px-12 py-4 ${
-                      isLoading ? "cursor-not-allowed" : "cursor-pointer"
-                    }`}
-                    disabled={isLoading}
-                  >
-                    {!isLoading ? "আপডেট তথ্য" : "Loading..."}
-                  </button>
-                </div>
-              </form>
             </div>
-          }
+
+            {/* form content goes here */}
+            <form onSubmit={formik.handleSubmit}>
+              <div className="form-group flex flex-wrap my-2 items-center ">
+                <label htmlFor="title" className="pr-4 w-full md:w-2/6">
+                  নামঃ
+                </label>
+                <input
+                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="নাম"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={values.name}
+                />
+              </div>
+
+              {errors.name && formik.touched.name && (
+                <h3 className="text-red-500">{errors.name}</h3>
+              )}
+
+              <div className="form-group flex flex-wrap my-2 items-center ">
+                <label htmlFor="institution" className="pr-4 w-full md:w-2/6">
+                  প্রতিষ্ঠানের নাম
+                </label>
+                <input
+                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
+                  type="text"
+                  id="institution"
+                  name="institution"
+                  placeholder="প্রতিষ্ঠানের নাম"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={values.institution}
+                />
+              </div>
+
+              {errors.institution && formik.touched.institution && (
+                <h3 className="text-red-500">{errors.institution}</h3>
+              )}
+
+              <div className="form-group flex flex-wrap my-2 items-center ">
+                <label htmlFor="title" className="pr-4  w-full md:w-2/6">
+                  পদঃ
+                </label>
+                <input
+                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
+                  type="text"
+                  id="position"
+                  name="position"
+                  placeholder="পদ"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={values.position}
+                />
+              </div>
+
+              {errors.position && touched.position && (
+                <div className="text-red-500">{errors.position}</div>
+              )}
+
+              <div className="form-group flex flex-wrap my-2 items-center">
+                <label htmlFor="date" className="pr-4  w-full md:w-2/6">
+                  মোবাইল নম্বরঃ
+                </label>
+                <input
+                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  placeholder="মোবাইল নম্বর(Optional)"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={values.phone}
+                />
+              </div>
+
+              {errors.phone && touched.phone && (
+                <div className="text-red-500">{errors.phone}</div>
+              )}
+
+              {/* Global error section */}
+              {isError && (
+                <div className="mt-3">
+                  <ErrorMsg msg={error.message} />
+                </div>
+              )}
+
+              {/* Button section */}
+              <div className="text-center mt-14 text-black">
+                <button
+                  type="submit"
+                  className={`bg-[#c5dfe77a] px-12 py-4 ${
+                    isLoading ? "cursor-not-allowed" : "cursor-pointer"
+                  }`}
+                  disabled={isLoading}
+                >
+                  {!isLoading ? "আপডেট তথ্য" : "Loading..."}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

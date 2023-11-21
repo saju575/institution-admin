@@ -1,8 +1,14 @@
 import { useFormik } from "formik";
 import { RxCross2 } from "react-icons/rx";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import * as Yup from "yup";
-import { createAdministrator } from "../../utills/createAdministrator";
+import { getSingleAdministrator } from "../../utills/getAdministrators";
+import {
+  updateAdministratorImage,
+  updateAdminstratorInfo,
+} from "../../utills/updateAdministrator";
 import ErrorMsg from "../errorMsg/ErrorMsg";
 
 /* 
@@ -15,33 +21,51 @@ const validationSchema = Yup.object({
   phone: Yup.string()
     .matches(/^[0-9]{11}$/, "মোবাইল নম্বর সঠিক নয়")
     .optional(),
-  image: Yup.mixed()
-    .required("ছবি অবশ্যই আপলোড করতে হবে")
-    .test("fileSize", "ফাইল অত্যন্ত বড় (সর্বাধিক 3 MB)", (value) => {
-      if (value) {
-        return value.size <= 3145728; // 3 MB in bytes (1024 * 1024 * 3)
-      }
-      return true;
-    }),
+
+  desc: Yup.string().optional(),
 });
 
-/* 
-  components
-*/
-const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
+const UpdateModal = ({
+  id,
+  handleModalClose,
+  heading,
+
+  type,
+  keyword,
+}) => {
+  /* 
+    fetch the particular id data
+  */
+  const { data, refetch } = useQuery({
+    queryFn: () => getSingleAdministrator(id),
+    queryKey: ["single administrator", { id }],
+  });
+
   /* 
     client query
   */
   const queryClient = useQueryClient();
 
   /* 
-    mutation query
+    data mutation
   */
   const { mutateAsync, isLoading, isError, error } = useMutation({
-    mutationFn: (data) => createAdministrator(data),
+    mutationFn: (data) => updateAdminstratorInfo(data),
     onSuccess: async () => {
-      queryClient.invalidateQueries(keyword); // invalidate
+      queryClient.invalidateQueries();
+      refetch();
       handleModalClose();
+    },
+  });
+
+  /* 
+        image mutation
+      */
+  const { mutateAsync: imageMutated } = useMutation({
+    mutationFn: (data) => updateAdministratorImage(data),
+    onSuccess: async () => {
+      queryClient.invalidateQueries();
+      refetch();
     },
   });
 
@@ -49,35 +73,40 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
     form filed with initial value 
   */
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      name: "",
-      position: "",
-      phone: "",
-      institution: "",
-      image: null,
+      institution: data?.payload?.institution || "",
+      name: data?.payload?.name || "",
+      position: data?.payload?.position || "",
+      phone: data?.payload?.phone || "",
+      desc: data?.payload?.desc || "",
     },
     validationSchema,
     onSubmit: async (values) => {
       // Handle form submission logic here
-      const formData = new FormData();
+      let updateData = {};
 
-      // Append  data to formData
+      // Append  data to new object
       for (const key in values) {
         if (values[key]) {
-          // check value existence
-          formData.append(key, values[key]);
+          updateData[key] = values[key]; // check for value existence
         }
       }
 
-      formData.append("role", type);
-
-      // create new member
-      await mutateAsync(formData);
+      await mutateAsync({ id, updateData });
     },
   });
 
   // formik object destructures
   const { errors, touched, values } = formik;
+
+  // image update handler
+  const handleImageChange = async (e) => {
+    const selectedImage = e.target.files[0];
+    const updatedImage = new FormData(); //using form data
+    updatedImage.append("image", selectedImage);
+    await imageMutated({ id, updatedImage }); // update image
+  };
 
   return (
     <div className={`modal-container`}>
@@ -92,15 +121,44 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
             </i>
           </span>
 
+          {/* Image content goes here */}
+          <div className="flex flex-col justify-center items-center mb-6">
+            <div className="relative  border-2 border-dashed border-slate-300 rounded-lg  w-48 h-48">
+              <input
+                type="file"
+                name="images"
+                id="images"
+                accept="image/*" // accept only the image
+                className="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer"
+                title="Try to upload photos..."
+                onChange={handleImageChange}
+              />
+              <div className="h-full w-full   gap-y-1">
+                {data?.payload?.image?.url ? (
+                  <img
+                    alt="placeholder"
+                    src={data?.payload?.image?.url}
+                    className="object-cover w-48 h-48"
+                  />
+                ) : (
+                  <img
+                    alt="placeholder"
+                    src="/assets/profile.jpg"
+                    className="object-cover w-48 h-48"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
           {/* form content goes here */}
           <div className="mt-10">
             <form onSubmit={formik.handleSubmit}>
               <div className="form-group flex flex-wrap my-2 items-center ">
-                <label htmlFor="name" className="pr-4 w-full md:w-1/3">
-                  নামঃ
+                <label htmlFor="name" className="pr-4 w-full md:w-2/6">
+                  নাম
                 </label>
                 <input
-                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
                   type="text"
                   id="name"
                   name="name"
@@ -116,11 +174,11 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center ">
-                <label htmlFor="institution" className="pr-4 w-full md:w-1/3">
-                  প্রতিষ্ঠানের নাম:
+                <label htmlFor="institution" className="pr-4 w-full md:w-2/6">
+                  প্রতিষ্ঠানের নাম
                 </label>
                 <input
-                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
                   type="text"
                   id="institution"
                   name="institution"
@@ -136,11 +194,12 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center ">
-                <label htmlFor="title" className="pr-4 w-full md:w-1/3">
-                  পদঃ
+                <label htmlFor="position" className="pr-4 w-full md:w-2/6">
+                  পদ
                 </label>
                 <input
-                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3 text-[#535353]"
+                  readOnly
                   type="text"
                   id="position"
                   name="position"
@@ -156,15 +215,15 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center">
-                <label htmlFor="date" className="pr-4 w-full md:w-1/3">
-                  মোবাইল নম্বরঃ
+                <label htmlFor="phone" className="pr-4 w-full md:w-2/6">
+                  মোবাইল নম্বর
                 </label>
                 <input
-                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
                   type="text"
                   id="phone"
                   name="phone"
-                  placeholder="মোবাইল নম্বর(Optional)"
+                  placeholder="মোবাইল নম্বর"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={values.phone}
@@ -175,34 +234,24 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
                 <div className="text-red-500">{errors.phone}</div>
               )}
 
-              <div className="form-group flex flex-wrap my-2 items-center">
-                <label htmlFor="image" className="pr-4 w-full md:w-1/3">
-                  ছবিঃ
+              {/* message */}
+              <div className="form-group flex flex-col my-2">
+                <label htmlFor="desc" className="w-full ">
+                  {heading.messageTitle}
                 </label>
-                <input
-                  className="w-full md:w-4/6"
-                  type="file"
-                  id="image"
-                  name="image"
-                  accept="image/*"
-                  onChange={(event) => {
-                    formik.setFieldValue("image", event.currentTarget.files[0]);
-                  }}
-                />
-              </div>
-
-              {errors.image && touched.image && (
-                <div className="text-red-500">{errors.image}</div>
-              )}
-
-              {formik.values.image && (
-                <div className="flex items-center justify-center">
-                  <img
-                    src={URL.createObjectURL(formik.values.image)}
-                    alt="Preview"
-                    className="mt-2 max-w-full max-h-40"
+                <div className="w-full">
+                  <ReactQuill
+                    className="h-64 mb-9 w-full"
+                    id="desc"
+                    name="desc"
+                    value={formik.values.desc}
+                    onChange={(value) => formik.setFieldValue("desc", value)}
+                    placeholder={heading.messageTitle}
                   />
                 </div>
+              </div>
+              {errors.desc && touched.desc && (
+                <div className="text-red-500 mt-8">{errors.desc}</div>
               )}
 
               {isError && (
@@ -218,7 +267,7 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
                   }`}
                   disabled={isLoading}
                 >
-                  {!isLoading ? "সংযোগ করুন" : "Loading..."}
+                  {!isLoading ? "আপডেট তথ্য" : "Loading..."}
                 </button>
               </div>
             </form>
@@ -229,4 +278,4 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
   );
 };
 
-export default CreateModal;
+export default UpdateModal;

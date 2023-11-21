@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import { RxCross2 } from "react-icons/rx";
 import { useMutation, useQueryClient } from "react-query";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import * as Yup from "yup";
 import { createAdministrator } from "../../utills/createAdministrator";
 import ErrorMsg from "../errorMsg/ErrorMsg";
@@ -23,12 +25,16 @@ const validationSchema = Yup.object({
       }
       return true;
     }),
+  desc: Yup.string().optional(),
 });
 
-/* 
-  components
-*/
-const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
+const CreateModal = ({
+  handleModalClose,
+  heading,
+  position,
+  type,
+  keyword,
+}) => {
   /* 
     client query
   */
@@ -51,9 +57,10 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      position: "",
-      phone: "",
       institution: "",
+      position: position,
+      phone: "",
+      desc: "",
       image: null,
     },
     validationSchema,
@@ -78,7 +85,6 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
 
   // formik object destructures
   const { errors, touched, values } = formik;
-
   return (
     <div className={`modal-container`}>
       <div className="modal shadow absolute top-10  bg-[#FFFFFF] p-6  border sm:p-14 w-[350px] sm:w-[600px] ">
@@ -96,11 +102,11 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
           <div className="mt-10">
             <form onSubmit={formik.handleSubmit}>
               <div className="form-group flex flex-wrap my-2 items-center ">
-                <label htmlFor="name" className="pr-4 w-full md:w-1/3">
-                  নামঃ
+                <label htmlFor="name" className="pr-4 w-full md:w-2/6">
+                  নাম
                 </label>
                 <input
-                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
                   type="text"
                   id="name"
                   name="name"
@@ -116,11 +122,11 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center ">
-                <label htmlFor="institution" className="pr-4 w-full md:w-1/3">
-                  প্রতিষ্ঠানের নাম:
+                <label htmlFor="institution" className="pr-4 w-full md:w-2/6">
+                  প্রতিষ্ঠানের নাম
                 </label>
                 <input
-                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
                   type="text"
                   id="institution"
                   name="institution"
@@ -136,11 +142,12 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center ">
-                <label htmlFor="title" className="pr-4 w-full md:w-1/3">
-                  পদঃ
+                <label htmlFor="position" className="pr-4 w-full md:w-2/6">
+                  পদ
                 </label>
                 <input
-                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3 text-[#535353]"
+                  readOnly
                   type="text"
                   id="position"
                   name="position"
@@ -156,11 +163,11 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center">
-                <label htmlFor="date" className="pr-4 w-full md:w-1/3">
-                  মোবাইল নম্বরঃ
+                <label htmlFor="phone" className="pr-4 w-full md:w-2/6">
+                  মোবাইল নম্বর (Optional)
                 </label>
                 <input
-                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-4/6"
+                  className="outline-none  px-4 py-2 bg-[#F3F3F3] w-full md:w-2/3"
                   type="text"
                   id="phone"
                   name="phone"
@@ -176,11 +183,11 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
               )}
 
               <div className="form-group flex flex-wrap my-2 items-center">
-                <label htmlFor="image" className="pr-4 w-full md:w-1/3">
-                  ছবিঃ
+                <label htmlFor="image" className="pr-4 w-full md:w-2/6">
+                  ছবি
                 </label>
                 <input
-                  className="w-full md:w-4/6"
+                  className="w-full md:w-2/3"
                   type="file"
                   id="image"
                   name="image"
@@ -203,6 +210,26 @@ const CreateModal = ({ handleModalClose, type, institution, keyword }) => {
                     className="mt-2 max-w-full max-h-40"
                   />
                 </div>
+              )}
+
+              {/* message */}
+              <div className="form-group flex flex-col my-2">
+                <label htmlFor="desc" className="w-full ">
+                  {heading.messageTitle} (Optional)
+                </label>
+                <div className="w-full">
+                  <ReactQuill
+                    className="h-64 mb-9 w-full"
+                    id="desc"
+                    name="desc"
+                    value={formik.values.desc}
+                    onChange={(value) => formik.setFieldValue("desc", value)}
+                    placeholder={heading.messageTitle}
+                  />
+                </div>
+              </div>
+              {errors.desc && touched.desc && (
+                <div className="text-red-500 mt-8">{errors.desc}</div>
               )}
 
               {isError && (

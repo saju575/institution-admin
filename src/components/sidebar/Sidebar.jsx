@@ -113,10 +113,12 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
                   <Link to="/management-committee">পরিচালনা কমিটি</Link>
                 </li>
                 <li className=" mb-1 ml-4">
-                  <Link to="/president-message">প্রতিষ্ঠান সভাপতির বাণী</Link>
+                  <Link to="/president-message">
+                    প্রতিষ্ঠানের সভাপতি সম্পর্কে
+                  </Link>
                 </li>
                 <li className=" mb-1 ml-4">
-                  <Link to="/principal-message">অধ্যক্ষের বাণী</Link>
+                  <Link to="/principal-message">অধ্যক্ষ সম্পর্কে</Link>
                 </li>
                 <li className=" mb-1 ml-4">
                   <Link to="/teachers">শিক্ষকবৃন্দ</Link>
@@ -408,10 +410,12 @@ const Sidebar = ({ isSidebarOpen, removeSidebar }) => {
                   <Link to="/management-committee">পরিচালনা কমিটি</Link>
                 </li>
                 <li onClick={removeSidebar} className="mb-1 ml-4">
-                  <Link to="/president-message">প্রতিষ্ঠান সভাপতির বাণী</Link>
+                  <Link to="/president-message">
+                    প্রতিষ্ঠানের সভাপতি সম্পর্কে
+                  </Link>
                 </li>
                 <li onClick={removeSidebar} className="mb-1 ml-4">
-                  <Link to="/principal-message">অধ্যক্ষের বাণী</Link>
+                  <Link to="/principal-message">অধ্যক্ষ সম্পর্কে</Link>
                 </li>
                 <li onClick={removeSidebar} className=" mb-1 ml-4">
                   <Link to="/teachers">শিক্ষকবৃন্দ</Link>

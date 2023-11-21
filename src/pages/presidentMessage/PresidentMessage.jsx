@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import ErrorMsg from "../../components/errorMsg/ErrorMsg";
-import CreateModal from "../../components/layoutModal/CreateModal";
-import UpdateModal from "../../components/layoutModal/UpdateModal";
+import CreateModal from "../../components/precedentialModal/CreateModal";
+import UpdateModal from "../../components/precedentialModal/UpdateModal";
 import Spinner from "../../components/spinner/Spinner";
-import { getLayoutData } from "../../utills/getLayoutData";
+import { getAdministrators } from "../../utills/getAdministrators";
+import PresidentData from "./PresidentData";
+
+const TYPE = "president";
 
 const PresidentMessage = () => {
   // Modal popup For add Events
@@ -35,55 +38,23 @@ const PresidentMessage = () => {
   // fetech data
   const { data, isLoading, error, isError } = useQuery({
     staleTime: Infinity,
-    queryKey: ["president_message"],
-    queryFn: () => getLayoutData(`/layout?type=president_message`),
+    queryKey: [TYPE],
+    queryFn: () => getAdministrators({ role: TYPE }),
   });
-
-  //data render
-
-  let layoutData;
-  if (isLoading) {
-    layoutData = (
-      <div className="flex justify-center items-center py-4">
-        <Spinner />
-      </div>
-    );
-  } else if (!isLoading && isError) {
-    layoutData = (
-      <div>
-        <ErrorMsg msg={error.message} />
-      </div>
-    );
-  } else if (!isLoading && !isError && !data?.payload) {
-    layoutData = (
-      <div>
-        <ErrorMsg msg={"No data found"} />
-      </div>
-    );
-  } else if (!isLoading && !isError && data?.payload) {
-    layoutData = (
-      <div
-        className="no-tailwind"
-        dangerouslySetInnerHTML={{
-          __html: data?.payload?.president_message?.desc || "",
-        }}
-      />
-    );
-  }
 
   return (
     <React.Fragment>
       <div id="teachers">
         <div className="teachers-title">
           <h3 className="bg-[#79929C] text-white font-medium text-md p-4">
-            প্রতিষ্ঠান সভাপতির বাণী
+            প্রতিষ্ঠানের সভাপতি সম্পর্কে
           </h3>
         </div>
 
         {/* add and update btn */}
-        {data && (
+        {data?.payload?.administrators && (
           <div className="flex justify-end gap-4 px-2 pt-2">
-            {!data?.payload ? (
+            {!data?.payload?.administrators?.length > 0 ? (
               <span
                 onClick={handleCreateModalOpen}
                 className="bg-[#244c63ad] px-4 text-white cursor-pointer  py-2 border"
@@ -101,28 +72,38 @@ const PresidentMessage = () => {
           </div>
         )}
 
-        {/* data */}
-        <div className="py-4 px-2">{layoutData}</div>
+        {isLoading ? (
+          <Spinner />
+        ) : isError ? (
+          <ErrorMsg msg={error.message} />
+        ) : data?.payload?.administrators?.length === 0 ? (
+          <ErrorMsg msg="No data found" />
+        ) : (
+          <>
+            <PresidentData data={data?.payload?.administrators[0]} />
+          </>
+        )}
       </div>
 
       {/* Modal Popup For add new member*/}
       {isCreateModalOpen && (
         <CreateModal
           handleModalClose={handleCreateModalClose}
-          type={"president_message"}
-          keyword={"president_message"}
-          heading={{ title: "নতুন সংযোগ করুন" }}
-          link={`/layout/create`}
+          type={TYPE}
+          keyword={TYPE}
+          position={"সভাপতি"}
+          heading={{ messageTitle: "সভাপতি বার্তা" }}
         />
       )}
 
+      {/* Update modal */}
       {isUpdateModalOpen && (
         <UpdateModal
-          id={data?.payload?._id}
           handleModalClose={handleUpdateModalClose}
-          type={"president_message"}
-          keyword={"president_message"}
-          heading={{ title: "আপডেট করুন" }}
+          type={TYPE}
+          keyword={TYPE}
+          heading={{ messageTitle: "সভাপতি বার্তা" }}
+          id={data?.payload?.administrators[0]._id}
         />
       )}
     </React.Fragment>
