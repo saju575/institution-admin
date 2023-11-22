@@ -58,7 +58,7 @@ const WaitingAdmission = () => {
   return (
     <>
       {/* Section Title */}
-      <div className="teachers-title mt-4">
+      <div className="teachers-title">
         <h3 className="bg-[#79929C] text-white font-medium text-md p-4 mb-3">
           ভর্তি অপেক্ষমান শিক্ষার্থীর তালিকা
         </h3>
@@ -66,13 +66,12 @@ const WaitingAdmission = () => {
 
       {/* Add More Content Button */}
       <div className=" cursor-pointer text-end mt-4 text-white">
-        <a
-          href="##"
+        <span
           onClick={handleModalOpen}
           className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
         >
-          নতুন সংযোগ{" "}
-        </a>
+          নতুন সংযোগ
+        </span>
       </div>
 
       {/* render data */}

@@ -62,13 +62,12 @@ const Workers = () => {
 
         {/* Add Content Button */}
         <div className="mb-4 cursor-pointer text-end mt-4 text-white">
-          <a
-            href="##"
+          <span
             onClick={handleModalOpen}
             className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
           >
             নতুন সংযোগ{" "}
-          </a>
+          </span>
         </div>
 
         {staffsData?.length > 0 && (

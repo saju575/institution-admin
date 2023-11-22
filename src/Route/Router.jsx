@@ -34,48 +34,67 @@ import Syllabus from "../pages/syllabus/Syllabus";
 import Teachers from "../pages/teachers/Teachers";
 import WaitingAdmission from "../pages/waitingAdmission/WaitingAdmission";
 import Workers from "../pages/workers/Workers";
+// import CheckLoading from "./CheckLoading";
+import GustRoute from "./GustRoute";
+import PrivateRoute from "./PrivateRoute";
 
 export const reactRouter = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route path="/login" element={<Login />} />
-      <Route path="/admin" element={<Home />} />
-      <Route path="/" element={<News />} />
-      <Route path="/about-us" element={<AboutUs />} />
-      <Route path="/aim-objective" element={<AimAndObjective />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/scout-guide" element={<ScoutGuide />} />
-      <Route path="/debate-competition" element={<DebateCompetition />} />
-      <Route path="/play" element={<Play />} />
-      <Route path="/management-committee" element={<ManagementCommittee />} />
-      <Route path="/president-message" element={<PresidentMessage />} />
-      <Route path="/principal-message" element={<PrincipalMessage />} />
-      <Route path="/teachers" element={<Teachers />} />
-      <Route path="/workers" element={<Workers />} />
-      <Route path="/class-routine" element={<ClassRoutine />} />
-      <Route path="/exam-routine" element={<ExamRoutine />} />
-      <Route path="/notice" element={<Notice />} />
-      <Route path="/syllabus" element={<Syllabus />} />
-      <Route path="/admission-notice" element={<AdmissionNotice />} />
+    <>
       <Route
-        path="/admission-exam-syllabus"
-        element={<AdmissionExamSyllabus />}
+        path="/login"
+        element={
+          <GustRoute>
+            <Login />
+          </GustRoute>
+        }
       />
       <Route
-        path="/list-of-selected-students-seeking-admission"
-        element={<SeekingAdmission />}
-      />
-      <Route
-        path="/list-of-selected-students-waiting-admission"
-        element={<WaitingAdmission />}
-      />
-      <Route path="/school-result" element={<UploadResult />} />
-      <Route path="/check-school-result" element={<CheckResult />} />
-      <Route path="/events" element={<Events />} />
-      {/* Edit Next line */}
-      <Route path="/detail-events" element={<DetailEvents />} />
+        path="/"
+        element={
+          <PrivateRoute>
+            <RootLayout />
+          </PrivateRoute>
+        }
+      >
+        <Route path="/admin" element={<Home />} />
+        <Route path="/" element={<News />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/aim-objective" element={<AimAndObjective />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/scout-guide" element={<ScoutGuide />} />
+        <Route path="/debate-competition" element={<DebateCompetition />} />
+        <Route path="/play" element={<Play />} />
+        <Route path="/management-committee" element={<ManagementCommittee />} />
+        <Route path="/president-message" element={<PresidentMessage />} />
+        <Route path="/principal-message" element={<PrincipalMessage />} />
+        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/workers" element={<Workers />} />
+        <Route path="/class-routine" element={<ClassRoutine />} />
+        <Route path="/exam-routine" element={<ExamRoutine />} />
+        <Route path="/notice" element={<Notice />} />
+        <Route path="/syllabus" element={<Syllabus />} />
+        <Route path="/admission-notice" element={<AdmissionNotice />} />
+        <Route
+          path="/admission-exam-syllabus"
+          element={<AdmissionExamSyllabus />}
+        />
+        <Route
+          path="/list-of-selected-students-seeking-admission"
+          element={<SeekingAdmission />}
+        />
+        <Route
+          path="/list-of-selected-students-waiting-admission"
+          element={<WaitingAdmission />}
+        />
+        <Route path="/school-result" element={<UploadResult />} />
+        <Route path="/check-school-result" element={<CheckResult />} />
+        <Route path="/events" element={<Events />} />
+        {/* Edit Next line */}
+        <Route path="/detail-events" element={<DetailEvents />} />
 
-      <Route path="/notice/:id" element={<NoticeDetails />} />
-    </Route>
+        <Route path="/notice/:id" element={<NoticeDetails />} />
+      </Route>
+    </>
   )
 );

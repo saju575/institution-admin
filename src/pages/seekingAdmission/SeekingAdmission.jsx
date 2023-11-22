@@ -66,7 +66,7 @@ const SeekingAdmission = () => {
           onClick={handleModalOpen}
           className="bg-[#244c63ad] px-4 my-2 w-44 py-2 border"
         >
-          নতুন সংযোগ{" "}
+          নতুন সংযোগ
         </span>
       </div>
 
