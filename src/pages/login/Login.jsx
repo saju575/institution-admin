@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React, { useContext } from "react";
 import { useMutation } from "react-query";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { AuthContext } from "../../providers/AuthProvider";
 import { adminLogin } from "../../utills/adminLogin";
@@ -117,9 +117,12 @@ const Login = () => {
                     {error.message}
                   </div>
                 )}
-                <p className="cursor-pointer underline capitalize text-lg font-medium text-end mt-4">
-                  reset your password
-                </p>
+                <Link
+                  to={"/forgot-password"}
+                  className="cursor-pointer underline capitalize text-lg font-medium text-end mt-4"
+                >
+                  Forgot your password ?
+                </Link>
               </div>
             </form>
           </div>

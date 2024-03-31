@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsCaretDownFill } from "react-icons/bs";
 import { TbBuildingBank } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SidebarItem = ({ title, isOpen, toggle, links }) => {
+  const { user } = useContext(AuthContext);
   return (
     <>
       <div
@@ -25,11 +27,19 @@ const SidebarItem = ({ title, isOpen, toggle, links }) => {
       {isOpen && (
         <div className="dropdown-menu border p-2">
           <ul>
-            {links.map((link, index) => (
-              <li key={index} className="mb-1 ml-4">
-                <Link to={link.path}>{link.label}</Link>
-              </li>
-            ))}
+            {user?.role === "superAdmin"
+              ? links.map((link, index) => (
+                  <li key={index} className="mb-1 ml-4">
+                    <Link to={link.path}>{link.label}</Link>
+                  </li>
+                ))
+              : links
+                  .filter((item) => item.type === "public")
+                  .map((link, index) => (
+                    <li key={index} className="mb-1 ml-4">
+                      <Link to={link.path}>{link.label}</Link>
+                    </li>
+                  ))}
           </ul>
         </div>
       )}

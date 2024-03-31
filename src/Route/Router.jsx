@@ -35,12 +35,31 @@ import Teachers from "../pages/teachers/Teachers";
 import WaitingAdmission from "../pages/waitingAdmission/WaitingAdmission";
 import Workers from "../pages/workers/Workers";
 // import CheckLoading from "./CheckLoading";
+import ActivateAdmin from "../pages/activateAdmin/ActivateAdmin";
+import AdminList from "../pages/adminList/AdminList";
+import Profile from "../pages/adminProfile/Profile";
+import ForgotPassword from "../pages/forgotPassword/ForgotPassword";
+import SetPasswordForm from "../pages/forgotPassword/SetPasswordForm";
+import CheckSuperAdmin from "./CheckSuperAdmin";
 import GustRoute from "./GustRoute";
 import PrivateRoute from "./PrivateRoute";
 
 export const reactRouter = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route
+        path="/forgot-password"
+        element={
+          <GustRoute>
+            <ForgotPassword />
+          </GustRoute>
+        }
+      />
+      <Route path="/admin/:id/verify/:token" element={<ActivateAdmin />} />
+      <Route
+        path="/reset-password/:id/verify/:token"
+        element={<SetPasswordForm />}
+      />
       <Route
         path="/login"
         element={
@@ -94,6 +113,15 @@ export const reactRouter = createBrowserRouter(
         <Route path="/detail-events" element={<DetailEvents />} />
 
         <Route path="/notice/:id" element={<NoticeDetails />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/admin-list"
+          element={
+            <CheckSuperAdmin>
+              <AdminList />
+            </CheckSuperAdmin>
+          }
+        />
       </Route>
     </>
   )
